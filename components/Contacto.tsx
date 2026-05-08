@@ -178,9 +178,6 @@ export function Contacto() {
             <div>
               <p className="eyebrow">Gestión</p>
               <p className="mt-3 font-mono text-sm text-text/80">{CONTACT.email}</p>
-              <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
-                INAMU Nuevo Cuyo
-              </p>
             </div>
           </motion.aside>
         </div>
