@@ -27,8 +27,8 @@ const DOWNLOADS = [
   },
   {
     label: "Fotos en alta resolución",
-    href: "https://drive.google.com/",
-    description: "Carpeta — fotos prensa y de show en alta resolución.",
+    href: "https://drive.google.com/drive/u/2/folders/1Sb5F2dBX6LI4m4wyoUG7ZWdYubbfuD5x",
+    description: "Carpeta de Drive — fotos de prensa y de show en alta resolución.",
     external: true,
   },
 ];

@@ -23,7 +23,11 @@ const TECH_INFO = [
 const DOWNLOADS = [
   { label: "Gacetilla de prensa", href: "/rumbo-gacetilla.pdf" },
   { label: "Rider técnico", href: "/rumbo-rider.pdf" },
-  { label: "Fotos en alta", href: "https://drive.google.com/", external: true },
+  {
+    label: "Fotos en alta",
+    href: "https://drive.google.com/drive/u/2/folders/1Sb5F2dBX6LI4m4wyoUG7ZWdYubbfuD5x",
+    external: true,
+  },
 ];
 
 export default function PrensaPage() {

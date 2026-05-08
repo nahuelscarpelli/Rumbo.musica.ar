@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { SOCIAL } from "@/lib/data";
 
@@ -12,24 +11,21 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Background image with art-directed mobile crop */}
+      {/* Background: video with image fallback (art-directed mobile crop) */}
       <div className="absolute inset-0 -z-10">
-        <Image
-          src="/hero/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hidden object-cover md:block"
-        />
-        <Image
-          src="/hero/hero-bg-mobile.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover md:hidden"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero/hero-bg.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden
+        >
+          <source src="/hero/hero.mp4" type="video/mp4" />
+        </video>
+
         {/* Dark overlay for legibility */}
         <div
           aria-hidden
