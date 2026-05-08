@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { MEMBERS, SOUND_TAGS } from "@/lib/data";
@@ -40,14 +41,24 @@ export function Nosotros() {
               className="group relative flex flex-col gap-5 bg-bg p-8 transition-colors duration-300 hover:bg-surface"
             >
               <div className="relative aspect-square w-full overflow-hidden border border-border bg-surface">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-7xl uppercase tracking-wider2 text-text/15 transition-all duration-500 group-hover:scale-110 group-hover:text-text/30">
-                    {m.initials}
-                  </span>
-                </div>
+                {m.image ? (
+                  <Image
+                    src={m.image}
+                    alt={`${m.name} — ${m.role}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover grayscale-[0.3] transition-all duration-700 group-hover:scale-[1.04] group-hover:grayscale-0"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display text-7xl uppercase tracking-wider2 text-text/15 transition-all duration-500 group-hover:scale-110 group-hover:text-text/30">
+                      {m.initials}
+                    </span>
+                  </div>
+                )}
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="absolute inset-0 bg-gradient-to-br from-transparent via-bg/20 to-bg/70 transition-opacity duration-500 group-hover:opacity-60"
                 />
                 <div className="absolute inset-x-0 bottom-0 flex translate-y-2 flex-col gap-1 bg-gradient-to-t from-bg/95 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   <span className="font-display text-lg uppercase tracking-wider2">

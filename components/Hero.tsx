@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { SOCIAL } from "@/lib/data";
 
@@ -11,38 +12,43 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Background image fallback + dark gradient */}
+      {/* Background image with art-directed mobile crop */}
       <div className="absolute inset-0 -z-10">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,#1a0d0a_0%,#0a0a0a_55%,#000_100%)]"
+        <Image
+          src="/hero/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hidden object-cover md:block"
         />
-        {/* Subtle moving gradient highlight */}
+        <Image
+          src="/hero/hero-bg-mobile.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover md:hidden"
+        />
+        {/* Dark overlay for legibility */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 bg-bg/55"
+        />
+        {/* Color accent */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-50"
           style={{
             background:
               "radial-gradient(circle at 70% 20%, rgba(192,57,43,0.18) 0%, transparent 45%), radial-gradient(circle at 20% 80%, rgba(232,213,183,0.06) 0%, transparent 50%)",
           }}
         />
-        {/* Vignette bottom */}
+        {/* Vignette bottom — fades into the next section */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-bg via-bg/80 to-transparent"
+          className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-bg via-bg/70 to-transparent"
         />
-        {/* Mountain silhouette accent (geometric, inspired by logo) */}
-        <svg
-          aria-hidden
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          className="absolute inset-x-0 bottom-0 h-44 w-full text-bg/95"
-        >
-          <path
-            fill="currentColor"
-            d="M0,256 L160,176 L260,224 L420,128 L600,224 L760,96 L920,224 L1100,160 L1260,224 L1440,176 L1440,320 L0,320 Z"
-          />
-        </svg>
       </div>
 
       <div className="container-rumbo relative flex flex-col items-center gap-10 py-32 text-center">

@@ -2,6 +2,7 @@ export type Member = {
   name: string;
   role: string;
   initials: string;
+  image?: string;
 };
 
 export type Release = {
@@ -27,12 +28,12 @@ export type Act = {
 };
 
 export const MEMBERS: Member[] = [
-  { name: "Martina Puebla", role: "Voz", initials: "MP" },
-  { name: "Richard Toro", role: "Guitarra y Dirección", initials: "RT" },
-  { name: "Nahuel Scarpelli", role: "Guitarra y Producción", initials: "NS" },
-  { name: "Matías Ríos", role: "Piano y Sintetizadores", initials: "MR" },
-  { name: "Samuel Franco", role: "Bajo", initials: "SF" },
-  { name: "Absalón \"Chino\" Dhuin", role: "Batería y Producción", initials: "AD" },
+  { name: "Martina Puebla", role: "Voz", initials: "MP", image: "/integrantes/martina-puebla.jpg" },
+  { name: "Richard Toro", role: "Guitarra y Dirección", initials: "RT", image: "/integrantes/richard-toro.png" },
+  { name: "Nahuel Scarpelli", role: "Guitarra y Producción", initials: "NS", image: "/integrantes/nahuel-scarpelli.png" },
+  { name: "Matías Ríos", role: "Piano y Sintetizadores", initials: "MR", image: "/integrantes/matias-rios.jpg" },
+  { name: "Samuel Franco", role: "Bajo", initials: "SF", image: "/integrantes/samuel-franco.png" },
+  { name: "Absalón \"Chino\" Dhuin", role: "Batería y Producción", initials: "AD", image: "/integrantes/absalon-dhuin.png" },
 ];
 
 export const RELEASES: Release[] = [
@@ -56,39 +57,6 @@ export const ACTS: Act[] = [
   { number: "III", title: "La Raíz", light: "20–50% luz", tagline: "Fusión total" },
   { number: "IV", title: "El Vuelo", light: "50–80% luz", tagline: "La expansión" },
   { number: "V", title: "La Luna", light: "78–100% luz", tagline: "La plenitud" },
-];
-
-export const PAST_DATES: ShowDate[] = [
-  {
-    date: "Destacado",
-    event: "Fiesta Departamental de la Vendimia",
-    location: "San Martín, Mendoza",
-  },
-  {
-    date: "Destacado",
-    event: "Vía Blanca Vendimia de Tupungato",
-    location: "Tupungato, Mendoza",
-  },
-  {
-    date: "Destacado",
-    event: "Casino de Mendoza",
-    location: "San Martín, Mendoza",
-  },
-  {
-    date: "Destacado",
-    event: "Cierre de Semana Santa",
-    location: "Manzano Histórico, Tunuyán",
-  },
-  {
-    date: "Destacado",
-    event: "Casino-Hotel Fuente Mayor",
-    location: "Vista Flores, Mendoza",
-  },
-  {
-    date: "Destacado",
-    event: "25 de Mayo Departamental",
-    location: "Tunuyán y Tupungato",
-  },
 ];
 
 export const UPCOMING_DATES: ShowDate[] = [

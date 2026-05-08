@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { PAST_DATES, UPCOMING_DATES } from "@/lib/data";
+import { UPCOMING_DATES } from "@/lib/data";
 
 export function Fechas() {
   return (
@@ -66,32 +66,6 @@ export function Fechas() {
           )}
         </div>
 
-        {/* Past highlights */}
-        <div className="mt-20">
-          <p className="eyebrow">Presentaciones destacadas</p>
-          <ul className="mt-6 flex flex-col">
-            {PAST_DATES.map((d, i) => (
-              <motion.li
-                key={`${d.event}-${i}`}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: i * 0.04 }}
-                className="grid grid-cols-1 gap-1 border-t border-border py-5 last:border-b md:grid-cols-[160px_1fr_auto] md:items-center md:gap-8"
-              >
-                <span className="font-mono text-xs uppercase tracking-widest2 text-muted">
-                  {d.date}
-                </span>
-                <span className="font-display text-xl uppercase tracking-wider2">
-                  {d.event}
-                </span>
-                <span className="font-mono text-xs uppercase tracking-widest2 text-text/60 md:text-right">
-                  {d.location}
-                </span>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
