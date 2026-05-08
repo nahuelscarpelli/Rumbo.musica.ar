@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0a0a0a;
+  --color-surface: #111111;
+  --color-border: #1f1f1f;
+  --color-accent: #c0392b;
+  --color-accent-2: #e8d5b7;
+  --color-text: #f0f0f0;
+  --color-muted: #555555;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-rumbo {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-10;
+  }
+
+  .section-title {
+    @apply font-display text-4xl md:text-6xl lg:text-7xl uppercase tracking-wider2;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-widest2 text-muted;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-widest2 border transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn border-accent bg-accent text-text hover:bg-transparent hover:text-accent;
+  }
+
+  .btn-ghost {
+    @apply btn border-text/40 text-text hover:border-text hover:bg-text hover:text-bg;
+  }
+
+  .divider-diag {
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 49.5%,
+      var(--color-border) 49.5%,
+      var(--color-border) 50.5%,
+      transparent 50.5%,
+      transparent 100%
+    );
+    height: 1px;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px -10px var(--color-accent);
+  }
+}
+
+/* Grain overlay — applied globally via pseudo-element */
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/></svg>");
+}
+
+/* Subtle starfield used in Show section */
+.starfield {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.5) 0, transparent 100%),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.4) 0, transparent 100%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.3) 0, transparent 100%),
+    radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.5) 0, transparent 100%),
+    radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.35) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 25%, rgba(255,255,255,0.6) 0, transparent 100%);
+  background-size: 100% 100%;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
