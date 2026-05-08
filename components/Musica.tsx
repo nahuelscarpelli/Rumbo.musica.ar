@@ -2,110 +2,107 @@
 
 import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { RELEASES, SOCIAL } from "@/lib/data";
-import { RumboLogo } from "@/components/ui/RumboLogo";
+import { RELEASES, type Release } from "@/lib/data";
 import { RumboMark } from "@/components/ui/RumboMark";
 
-export function Musica() {
-  const spotifyEmbed = process.env.NEXT_PUBLIC_SPOTIFY_EMBED_URL;
+function spotifyEmbedSrc(release: Release): string | null {
+  if (release.spotifyTrackId) {
+    return `https://open.spotify.com/embed/track/${release.spotifyTrackId}?utm_source=generator&theme=0`;
+  }
+  if (release.spotifyAlbumId) {
+    return `https://open.spotify.com/embed/album/${release.spotifyAlbumId}?utm_source=generator&theme=0`;
+  }
+  return null;
+}
 
+export function Musica() {
   return (
     <section id="musica" className="relative py-24 md:py-32">
       <div className="container-rumbo">
         <SectionTitle eyebrow="01 — Discografía">Música</SectionTitle>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
-          {/* Spotify embed */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
-            className="relative aspect-square w-full max-w-md overflow-hidden border border-border bg-surface"
-          >
-            {spotifyEmbed ? (
-              <iframe
-                title="RUMBO en Spotify"
-                src={spotifyEmbed}
-                width="100%"
-                height="100%"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="h-full w-full"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-8 text-center">
-                <RumboMark className="h-16 w-auto text-text/40" />
-                <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
-                  Spotify embed
-                </p>
-                <p className="text-sm text-text/60">
-                  Configurar <code className="text-accent-2">NEXT_PUBLIC_SPOTIFY_EMBED_URL</code> en
-                  el entorno.
-                </p>
-                <a
-                  href={SOCIAL.spotify}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost mt-2"
+        <div className="mt-12 grid gap-px bg-border md:grid-cols-2">
+          {RELEASES.map((release, i) => (
+            <motion.article
+              key={release.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="relative flex flex-col gap-6 bg-bg p-6 md:p-8"
+            >
+              <header className="flex flex-col gap-2">
+                <span
+                  className={`inline-flex w-fit items-center gap-2 font-mono text-[10px] uppercase tracking-widest2 ${
+                    release.comingSoon ? "text-accent" : "text-muted"
+                  }`}
                 >
-                  Ir a Spotify
-                </a>
-              </div>
-            )}
-          </motion.div>
+                  <span
+                    aria-hidden
+                    className={`block h-1.5 w-1.5 rotate-45 ${
+                      release.comingSoon ? "bg-accent" : "bg-accent-2"
+                    }`}
+                  />
+                  {release.comingSoon ? "Próximamente" : "Disponible"}
+                </span>
+                <h3 className="font-display text-3xl uppercase tracking-wider2 md:text-4xl">
+                  {release.title}
+                </h3>
+                <p className="text-sm text-text/60">{release.description}</p>
+              </header>
 
-          {/* Release list */}
-          <div className="flex flex-col gap-4">
-            <p className="eyebrow">Releases destacados</p>
-            <ul className="flex flex-col">
-              {RELEASES.map((release, i) => (
-                <motion.li
-                  key={release.title}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-t border-border py-5 last:border-b"
-                >
-                  <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-border bg-bg md:h-20 md:w-20">
-                    <RumboMark className="h-8 w-auto text-text/30 group-hover:text-accent transition-colors" />
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
-                    />
+              {release.comingSoon ? (
+                <div className="flex flex-1 flex-col items-center justify-center gap-4 border border-dashed border-border bg-surface/50 p-10 text-center">
+                  <RumboMark className="h-10 w-auto text-text/30" />
+                  <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
+                    Próximo lanzamiento
+                  </p>
+                  <p className="text-sm text-text/60">
+                    Mantenete cerca para escucharlo en cuanto salga.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {spotifyEmbedSrc(release) && (
+                    <div className="relative w-full overflow-hidden border border-border bg-surface">
+                      <iframe
+                        title={`${release.title} en Spotify`}
+                        src={spotifyEmbedSrc(release) ?? undefined}
+                        width="100%"
+                        height={release.spotifyAlbumId ? 352 : 152}
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="block w-full"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-3">
+                    {release.spotifyUrl && (
+                      <a
+                        href={release.spotifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest2 text-text/80 hover:border-accent hover:text-accent transition-colors"
+                      >
+                        ▶ Spotify
+                      </a>
+                    )}
+                    {release.youtubeUrl && (
+                      <a
+                        href={release.youtubeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest2 text-text/80 hover:border-accent hover:text-accent transition-colors"
+                      >
+                        ▶ YouTube
+                      </a>
+                    )}
                   </div>
-                  <div className="flex flex-col">
-                    <h3 className="font-display text-2xl uppercase tracking-wider2 md:text-3xl">
-                      {release.title}
-                    </h3>
-                    <p className="text-sm text-text/60">{release.description}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <a
-                      href={SOCIAL.spotify}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Escuchar ${release.title} en Spotify`}
-                      className="font-mono text-[10px] uppercase tracking-widest2 text-text/70 hover:text-accent transition-colors"
-                    >
-                      Spotify
-                    </a>
-                    <span className="text-muted">·</span>
-                    <a
-                      href={SOCIAL.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Ver ${release.title} en YouTube`}
-                      className="font-mono text-[10px] uppercase tracking-widest2 text-text/70 hover:text-accent transition-colors"
-                    >
-                      YouTube
-                    </a>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
+                </>
+              )}
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

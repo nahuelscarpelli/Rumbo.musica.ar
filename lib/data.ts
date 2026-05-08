@@ -8,8 +8,12 @@ export type Member = {
 export type Release = {
   title: string;
   description: string;
+  spotifyTrackId?: string;
+  spotifyAlbumId?: string;
   spotifyUrl?: string;
+  youtubeId?: string;
   youtubeUrl?: string;
+  comingSoon?: boolean;
 };
 
 export type ShowDate = {
@@ -23,7 +27,6 @@ export type ShowDate = {
 export type Act = {
   number: string;
   title: string;
-  light: string;
   tagline: string;
 };
 
@@ -40,23 +43,40 @@ export const RELEASES: Release[] = [
   {
     title: "La Luna",
     description: "Reversión de Áhyre",
+    spotifyTrackId: "0yj1hgXv1D4mEPLaTxO2ad",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/0yj1hgXv1D4mEPLaTxO2ad",
+    youtubeId: "LlTaNi7LUuA",
+    youtubeUrl: "https://www.youtube.com/watch?v=LlTaNi7LUuA",
   },
   {
     title: "Mi mariposa triste",
     description: "Reversión de Hernán Figueroa Reyes",
+    spotifyTrackId: "5yaqWWAyYg6IZijGEuWs5Y",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/5yaqWWAyYg6IZijGEuWs5Y",
+    youtubeId: "Flicqztzb1k",
+    youtubeUrl: "https://www.youtube.com/watch?v=Flicqztzb1k",
+  },
+  {
+    title: "Live Session",
+    description: "Sesión en vivo — álbum",
+    spotifyAlbumId: "6w5JvTMWJl1wD4eRGPA3kJ",
+    spotifyUrl: "https://open.spotify.com/intl-es/album/6w5JvTMWJl1wD4eRGPA3kJ",
+    youtubeId: "VJAOUMmVxmA",
+    youtubeUrl: "https://www.youtube.com/watch?v=VJAOUMmVxmA&list=PLnMoXbPBZOkRf7KSFVpgp7MqzCXgEKJ6v",
   },
   {
     title: "Zamba para no morir",
     description: "feat. Cristian Soloa",
+    comingSoon: true,
   },
 ];
 
 export const ACTS: Act[] = [
-  { number: "I", title: "La Tierra", light: "0–5% luz", tagline: "El origen" },
-  { number: "II", title: "El Despertar", light: "5–20% luz", tagline: "La raíz que despierta" },
-  { number: "III", title: "La Raíz", light: "20–50% luz", tagline: "Fusión total" },
-  { number: "IV", title: "El Vuelo", light: "50–80% luz", tagline: "La expansión" },
-  { number: "V", title: "La Luna", light: "78–100% luz", tagline: "La plenitud" },
+  { number: "I", title: "La Tierra", tagline: "El origen" },
+  { number: "II", title: "El Despertar", tagline: "La raíz que despierta" },
+  { number: "III", title: "La Raíz", tagline: "Fusión total" },
+  { number: "IV", title: "El Vuelo", tagline: "La expansión" },
+  { number: "V", title: "La Luna", tagline: "La plenitud" },
 ];
 
 export const UPCOMING_DATES: ShowDate[] = [

@@ -1,40 +1,23 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { RumboMark } from "@/components/ui/RumboMark";
 
-type Category = "todos" | "vivo" | "estudio" | "prensa";
-
 type Photo = {
   id: number;
-  category: Exclude<Category, "todos">;
   caption: string;
 };
 
-// Placeholder photos — replace `src` once real photos are uploaded to /public.
+// Placeholder photos — replace with real photos in /public/galeria/.
 const PHOTOS: Photo[] = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
-  category: (["vivo", "estudio", "prensa"][i % 3] as Photo["category"]),
   caption: `RUMBO — registro ${String(i + 1).padStart(2, "0")}`,
 }));
 
-const FILTERS: { value: Category; label: string }[] = [
-  { value: "todos", label: "Todos" },
-  { value: "vivo", label: "En vivo" },
-  { value: "estudio", label: "Estudio" },
-  { value: "prensa", label: "Prensa" },
-];
-
 export function Galeria() {
-  const [filter, setFilter] = useState<Category>("todos");
   const [lightbox, setLightbox] = useState<Photo | null>(null);
-
-  const photos = useMemo(
-    () => (filter === "todos" ? PHOTOS : PHOTOS.filter((p) => p.category === filter)),
-    [filter]
-  );
 
   const youtubeId = process.env.NEXT_PUBLIC_YOUTUBE_LATEST_VIDEO;
 
@@ -43,32 +26,13 @@ export function Galeria() {
       <div className="container-rumbo">
         <SectionTitle eyebrow="04 — Visual">Galería</SectionTitle>
 
-        {/* Filters */}
-        <div className="mt-10 flex flex-wrap gap-3">
-          {FILTERS.map((f) => (
-            <button
-              key={f.value}
-              type="button"
-              onClick={() => setFilter(f.value)}
-              className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-widest2 transition-colors ${
-                filter === f.value
-                  ? "border-accent bg-accent text-text"
-                  : "border-border text-text/70 hover:border-text hover:text-text"
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <ul className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-          {photos.map((photo, i) => (
+        <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+          {PHOTOS.map((photo, i) => (
             <motion.li
               key={photo.id}
-              layout
               initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.4, delay: (i % 8) * 0.04 }}
             >
               <button
@@ -87,9 +51,6 @@ export function Galeria() {
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60"
                 />
-                <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-widest2 text-text/70">
-                  {photo.category}
-                </span>
               </button>
             </motion.li>
           ))}

@@ -102,9 +102,6 @@ export function Show() {
                     <h3 className="mt-2 font-display text-3xl uppercase tracking-wider2">
                       {act.title}
                     </h3>
-                    <span className="mt-2 font-mono text-[10px] uppercase tracking-widest2 text-muted">
-                      {act.light}
-                    </span>
                     <p className="mt-3 text-sm text-text/70">{act.tagline}</p>
                   </motion.li>
                 ))}
@@ -137,9 +134,6 @@ export function Show() {
                 <h3 className="font-display text-2xl uppercase tracking-wider2">
                   {act.title}
                 </h3>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-widest2 text-muted">
-                  {act.light}
-                </p>
                 <p className="mt-2 text-sm text-text/70">{act.tagline}</p>
               </motion.li>
             ))}
