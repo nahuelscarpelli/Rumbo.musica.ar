@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { RumboLogo } from "@/components/ui/RumboLogo";
+import { RumboMark } from "@/components/ui/RumboMark";
 import { CONTACT, SOCIAL } from "@/lib/data";
 
 const SOCIALS = [
@@ -16,7 +16,7 @@ export function Footer() {
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-5">
             <Link href="#hero" aria-label="RUMBO" className="text-text">
-              <RumboLogo className="text-2xl md:text-3xl" />
+              <RumboMark className="h-8 w-auto md:h-10" />
             </Link>
             <p className="font-display text-2xl uppercase tracking-wider2 md:text-3xl">
               Música argentina,

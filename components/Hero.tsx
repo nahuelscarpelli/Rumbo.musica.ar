@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { RumboMark } from "@/components/ui/RumboMark";
 import { SOCIAL } from "@/lib/data";
 
 const tagline = "MÚSICA ARGENTINA, SIN ETIQUETAS.";
@@ -47,25 +46,12 @@ export function Hero() {
       </div>
 
       <div className="container-rumbo relative flex flex-col items-center gap-10 py-32 text-center">
-        <h1 className="sr-only">RUMBO — Música argentina, sin etiquetas.</h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <RumboMark
-            aria-hidden
-            className="mx-auto h-20 w-auto text-text md:h-28 lg:h-32"
-          />
-        </motion.div>
-
-        <motion.p
+        <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.1, delay: 0.2 }}
-          aria-hidden
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-7xl uppercase tracking-[0.04em] md:text-9xl lg:text-[10rem] lg:leading-[0.95]"
+          aria-label="RUMBO"
         >
           <span className="inline-flex">
             {"RUMBO".split("").map((ch, i) => (
@@ -73,13 +59,13 @@ export function Hero() {
                 key={i}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.35 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.15 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
               >
                 {ch}
               </motion.span>
             ))}
           </span>
-        </motion.p>
+        </motion.h1>
 
         <div className="flex flex-col items-center gap-4">
           <motion.p

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { RumboLogo } from "@/components/ui/RumboLogo";
+import { RumboMark } from "@/components/ui/RumboMark";
 import { NAV_LINKS } from "@/lib/data";
 
 export function Navbar() {
@@ -37,7 +37,7 @@ export function Navbar() {
           aria-label="RUMBO — inicio"
           className="text-text hover:text-accent transition-colors"
         >
-          <RumboLogo className="text-xl md:text-2xl" />
+          <RumboMark className="h-6 w-auto md:h-7" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
