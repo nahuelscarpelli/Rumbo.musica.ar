@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, DM_Mono } from "next/font/google";
+import { Anton, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/ui/Cursor";
 
-const display = Bebas_Neue({
+const display = Anton({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-display",

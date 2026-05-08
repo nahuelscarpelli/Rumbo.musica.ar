@@ -1,47 +1,46 @@
-import type { SVGProps } from "react";
+import type { CSSProperties } from "react";
+import { RumboMark } from "./RumboMark";
 
-type Props = SVGProps<SVGSVGElement> & {
+type Props = {
+  className?: string;
+  /** Show the wordmark "RUMBO" next to the mark. Defaults to true. */
   showWordmark?: boolean;
+  /** Stack the wordmark below the mark instead of next to it. */
+  stacked?: boolean;
+  style?: CSSProperties;
 };
 
-export function RumboLogo({ showWordmark = true, ...props }: Props) {
+/**
+ * Full RUMBO logo: mountain mark + wordmark in Anton.
+ * Inherits color from CSS via `currentColor`.
+ *
+ * The container sets the height; mark and wordmark scale proportionally.
+ */
+export function RumboLogo({
+  className = "",
+  showWordmark = true,
+  stacked = false,
+  style,
+}: Props) {
+  if (!showWordmark) {
+    return <RumboMark className={className} style={style} aria-label="RUMBO" />;
+  }
+
   return (
-    <svg
-      viewBox="0 0 200 60"
+    <span
       role="img"
       aria-label="RUMBO"
-      fill="none"
-      stroke="currentColor"
-      {...props}
+      className={`inline-flex ${stacked ? "flex-col" : "flex-row"} items-center gap-[0.4em] leading-none ${className}`}
+      style={style}
     >
-      {/* Symbol — three stylized peaks (mountains / frequency wave) */}
-      <g strokeWidth="2.4" strokeLinecap="square" strokeLinejoin="miter">
-        {/* Diagonal slash to the left */}
-        <path d="M2 44 L14 22" />
-        {/* Peak 1 (small) */}
-        <path d="M16 38 L24 24 L32 38" />
-        {/* Peak 2 (tall) */}
-        <path d="M30 40 L44 12 L58 40" />
-        {/* Peak 3 (medium) */}
-        <path d="M54 38 L64 22 L74 38" />
-        {/* Baseline */}
-        <path d="M2 48 L78 48" opacity="0.55" />
-      </g>
-
-      {showWordmark && (
-        <text
-          x="92"
-          y="42"
-          fill="currentColor"
-          stroke="none"
-          fontFamily="var(--font-display), system-ui, sans-serif"
-          fontWeight="700"
-          fontSize="34"
-          letterSpacing="6"
-        >
-          RUMBO
-        </text>
-      )}
-    </svg>
+      <RumboMark aria-hidden className="h-[0.85em] w-auto" />
+      <span
+        aria-hidden
+        className="font-display tracking-[0.04em] text-[1em]"
+        style={{ fontSize: "1em" }}
+      >
+        RUMBO
+      </span>
+    </span>
   );
 }

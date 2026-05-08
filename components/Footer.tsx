@@ -16,7 +16,7 @@ export function Footer() {
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-5">
             <Link href="#hero" aria-label="RUMBO" className="text-text">
-              <RumboLogo className="h-10 w-auto" />
+              <RumboLogo className="text-2xl md:text-3xl" />
             </Link>
             <p className="font-display text-2xl uppercase tracking-wider2 md:text-3xl">
               Música argentina,

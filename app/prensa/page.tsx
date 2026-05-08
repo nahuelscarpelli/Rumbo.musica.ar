@@ -50,7 +50,7 @@ export default function PrensaPage() {
                 técnicos.
               </p>
             </div>
-            <RumboLogo className="h-14 w-auto text-text" />
+            <RumboLogo className="text-3xl text-text md:text-4xl" />
           </header>
 
           <section className="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr]">

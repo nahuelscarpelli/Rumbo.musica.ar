@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { RumboLogo } from "@/components/ui/RumboLogo";
+import { RumboMark } from "@/components/ui/RumboMark";
 
 type Category = "todos" | "vivo" | "estudio" | "prensa";
 
@@ -81,10 +81,7 @@ export function Galeria() {
                   aria-hidden
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <RumboLogo
-                    showWordmark={false}
-                    className="h-10 w-auto text-text/15 transition-all duration-500 group-hover:scale-110 group-hover:text-text/30"
-                  />
+                  <RumboMark className="h-10 w-auto text-text/15 transition-all duration-500 group-hover:scale-110 group-hover:text-text/30" />
                 </span>
                 <span
                   aria-hidden
@@ -113,7 +110,7 @@ export function Galeria() {
               />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-10 text-center">
-                <RumboLogo showWordmark={false} className="h-12 w-auto text-text/30" />
+                <RumboMark className="h-12 w-auto text-text/30" />
                 <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
                   Configurar NEXT_PUBLIC_YOUTUBE_LATEST_VIDEO
                 </p>
@@ -154,7 +151,7 @@ export function Galeria() {
               onClick={(e) => e.stopPropagation()}
             >
               <span className="absolute inset-0 flex items-center justify-center">
-                <RumboLogo showWordmark={false} className="h-24 w-auto text-text/20" />
+                <RumboMark className="h-24 w-auto text-text/20" />
               </span>
               <span className="absolute bottom-4 left-4 font-mono text-xs uppercase tracking-widest2 text-text/70">
                 {lightbox.caption}

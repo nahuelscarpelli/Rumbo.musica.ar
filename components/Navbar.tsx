@@ -37,7 +37,7 @@ export function Navbar() {
           aria-label="RUMBO — inicio"
           className="text-text hover:text-accent transition-colors"
         >
-          <RumboLogo className="h-8 w-auto md:h-9" />
+          <RumboLogo className="text-xl md:text-2xl" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">

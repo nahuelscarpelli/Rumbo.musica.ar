@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { RELEASES, SOCIAL } from "@/lib/data";
 import { RumboLogo } from "@/components/ui/RumboLogo";
+import { RumboMark } from "@/components/ui/RumboMark";
 
 export function Musica() {
   const spotifyEmbed = process.env.NEXT_PUBLIC_SPOTIFY_EMBED_URL;
@@ -34,7 +35,7 @@ export function Musica() {
               />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-8 text-center">
-                <RumboLogo showWordmark={false} className="h-16 w-auto text-text/40" />
+                <RumboMark className="h-16 w-auto text-text/40" />
                 <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
                   Spotify embed
                 </p>
@@ -68,10 +69,7 @@ export function Musica() {
                   className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-t border-border py-5 last:border-b"
                 >
                   <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-border bg-bg md:h-20 md:w-20">
-                    <RumboLogo
-                      showWordmark={false}
-                      className="h-8 w-auto text-text/30 group-hover:text-accent transition-colors"
-                    />
+                    <RumboMark className="h-8 w-auto text-text/30 group-hover:text-accent transition-colors" />
                     <span
                       aria-hidden
                       className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
