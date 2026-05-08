@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
+      className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
       {/* Background: image always visible, video plays on top when ready */}
       <div className="absolute inset-0 -z-10 overflow-hidden bg-bg">
