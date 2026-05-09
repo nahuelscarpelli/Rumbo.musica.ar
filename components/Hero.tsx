@@ -93,7 +93,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 1.4 }}
             className="font-mono text-xs uppercase tracking-widest2 text-muted md:text-sm"
           >
-            Folclore <span className="text-accent">·</span> Electrónica{" "}
+            Folclore <span className="text-accent">·</span> Sintetizadores{" "}
             <span className="text-accent">·</span> Identidad
           </motion.p>
         </div>
