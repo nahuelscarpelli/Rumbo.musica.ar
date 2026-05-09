@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Musica } from "@/components/Musica";
 import { Show } from "@/components/Show";
+import { StemPlayer } from "@/components/StemPlayer";
 import { Nosotros } from "@/components/Nosotros";
 import { Fechas } from "@/components/Fechas";
 import { Galeria } from "@/components/Galeria";
@@ -17,6 +18,7 @@ export default function HomePage() {
         <Hero />
         <Musica />
         <Show />
+        <StemPlayer />
         <Nosotros />
         <Fechas />
         <Galeria />

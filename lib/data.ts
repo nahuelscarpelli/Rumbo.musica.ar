@@ -116,6 +116,7 @@ export const SOCIAL = {
 export const NAV_LINKS = [
   { href: "#musica", label: "Música" },
   { href: "#show", label: "Show" },
+  { href: "#arma-el-rumbo", label: "Armá el Rumbo" },
   { href: "#nosotros", label: "Nosotros" },
   { href: "#fechas", label: "Fechas" },
   { href: "#galeria", label: "Galería" },
