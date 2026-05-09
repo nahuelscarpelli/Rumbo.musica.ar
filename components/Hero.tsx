@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { SOCIAL } from "@/lib/data";
 
@@ -12,34 +11,14 @@ export function Hero() {
       id="hero"
       className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Background: image always visible, video plays on top when ready */}
+      {/* Background video */}
       <div className="absolute inset-0 -z-10 overflow-hidden bg-bg">
-        {/* Always-on image fallback */}
-        <Image
-          src="/hero/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hidden object-cover md:block"
-        />
-        <Image
-          src="/hero/hero-bg-mobile.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover md:hidden"
-        />
-
-        {/* Video on top — covers the image once it loads */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster="/hero/hero-bg.jpg"
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden
         >
