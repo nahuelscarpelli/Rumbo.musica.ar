@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/ui/Cursor";
+import { MusicGroupSchema, WebsiteSchema } from "@/components/seo/StructuredData";
 
 const display = Anton({
   subsets: ["latin"],
@@ -20,37 +21,82 @@ const mono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rumbo.musica.ar"),
   title: {
-    default: "RUMBO — Música Argentina",
+    default: "RUMBO — Banda de folclore fusión de Mendoza, Argentina",
     template: "%s · RUMBO",
   },
   description:
-    "Banda mendocina que fusiona el folclore argentino con sonidos modernos. Chacareras, zambas y gatos con electrónica, guitarra eléctrica y sintetizadores.",
+    "RUMBO es una banda mendocina de folclore fusión. Fusionamos chacarera, zamba, gato y cueca con electrónica, guitarra eléctrica y sintetizadores. Música argentina contemporánea desde Mendoza.",
+  applicationName: "RUMBO",
+  generator: "Next.js",
   keywords: [
     "rumbo",
+    "rumbo banda",
+    "rumbo mendoza",
     "rumbo folclore",
+    "rumbo folclore fusión",
+    "rumbo música",
+    "banda rumbo",
     "folclore argentino",
-    "banda mendoza",
+    "folclore mendoza",
     "folclore fusión",
-    "música argentina",
+    "música argentina contemporánea",
+    "banda de mendoza",
+    "chacarera fusión",
+    "zamba fusión",
     "del silencio a la luna",
+    "rumbo folclore argentino",
+    "rumbo música argentina",
+    "banda mendocina",
+    "cuyo",
+    "INAMU Nuevo Cuyo",
   ],
-  authors: [{ name: "RUMBO" }],
+  authors: [{ name: "RUMBO", url: "https://rumbo.musica.ar" }],
   creator: "RUMBO",
+  publisher: "RUMBO",
+  category: "music",
+  alternates: {
+    canonical: "https://rumbo.musica.ar",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "RUMBO — Música Argentina",
-    description: "Folclore argentino fusionado con sonidos modernos.",
+    title: "RUMBO — Banda de folclore fusión de Mendoza",
+    description:
+      "Folclore argentino fusionado con sonidos modernos. Chacareras, zambas y gatos con electrónica, guitarra eléctrica y sintetizadores.",
     url: "https://rumbo.musica.ar",
     siteName: "RUMBO",
     locale: "es_AR",
     type: "website",
+    images: [
+      {
+        url: "/og/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RUMBO — Música argentina, sin etiquetas.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RUMBO — Música Argentina",
+    title: "RUMBO — Banda de folclore fusión de Mendoza",
     description: "Folclore argentino fusionado con sonidos modernos.",
+    images: ["/og/og-default.jpg"],
   },
   icons: {
     icon: "/favicon.svg",
+  },
+  verification: {
+    // Reemplazar cuando se registre el sitio en Google Search Console
+    // google: "REEMPLAZAR-CON-CODIGO-DE-VERIFICACION",
   },
 };
 
@@ -63,6 +109,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-AR" className={`${display.variable} ${mono.variable}`}>
+      <head>
+        <MusicGroupSchema />
+        <WebsiteSchema />
+      </head>
       <body className="grain-overlay min-h-screen bg-bg text-text antialiased">
         <Cursor />
         {children}
