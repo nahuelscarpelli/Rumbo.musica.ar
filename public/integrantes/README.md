@@ -8,12 +8,12 @@ Mantener **exactamente estos nombres de archivo** (los referencia `lib/data.ts`)
 
 | Archivo | Integrante | Rol |
 |---|---|---|
-| `martina-puebla.jpg` | Martina Puebla | Voz |
-| `richard-toro.png` | Richard Toro | Guitarra y Dirección |
-| `nahuel-scarpelli.png` | Nahuel Scarpelli | Guitarra y Producción |
-| `matias-rios.jpg` | Matías Ríos | Piano y Sintetizadores |
-| `samuel-franco.png` | Samuel Franco | Bajo |
-| `absalon-dhuin.png` | Absalón "Chino" Dhuin | Batería y Producción |
+| `marty.jpeg` | Martina Puebla | Voz |
+| `richard.jpeg` | Richard Toro | Guitarra y Dirección |
+| `nahuel.jpeg` | Nahuel Scarpelli | Guitarra y Producción |
+| `maty.jpeg` | Matías Ríos | Piano y Sintetizadores |
+| `samu.jpeg` | Samuel Franco | Bajo |
+| `chino.jpeg` | Absalón "Chino" Dhuin | Batería y Producción |
 
 > Si querés cambiar la extensión (`.jpg` ↔ `.png`), avisame para actualizar `lib/data.ts` en el mismo commit.
 
