@@ -31,12 +31,12 @@ export type Act = {
 };
 
 export const MEMBERS: Member[] = [
-  { name: "Martina Puebla", role: "Voz", initials: "MP", image: "/integrantes/martina-puebla.jpg" },
-  { name: "Richard Toro", role: "Guitarra y Dirección", initials: "RT", image: "/integrantes/richard-toro.png" },
-  { name: "Nahuel Scarpelli", role: "Guitarra y Producción", initials: "NS", image: "/integrantes/nahuel-scarpelli.png" },
-  { name: "Matías Ríos", role: "Piano y Sintetizadores", initials: "MR", image: "/integrantes/matias-rios.jpg" },
-  { name: "Samuel Franco", role: "Bajo", initials: "SF", image: "/integrantes/samuel-franco.png" },
-  { name: "Absalón \"Chino\" Dhuin", role: "Batería y Producción", initials: "AD", image: "/integrantes/absalon-dhuin.png" },
+  { name: "Martina Puebla", role: "Voz", initials: "MP", image: "/integrantes/marty.jpeg" },
+  { name: "Richard Toro", role: "Guitarra y Dirección", initials: "RT", image: "/integrantes/richard.jpeg" },
+  { name: "Nahuel Scarpelli", role: "Guitarra y Producción", initials: "NS", image: "/integrantes/nahuel.jpeg" },
+  { name: "Matías Ríos", role: "Piano y Sintetizadores", initials: "MR", image: "/integrantes/maty.jpeg" },
+  { name: "Samuel Franco", role: "Bajo", initials: "SF", image: "/integrantes/samu.jpeg" },
+  { name: "Absalón \"Chino\" Dhuin", role: "Batería y Producción", initials: "AD", image: "/integrantes/chino.jpeg" },
 ];
 
 export const RELEASES: Release[] = [
