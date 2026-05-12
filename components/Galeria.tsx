@@ -1,20 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { RumboMark } from "@/components/ui/RumboMark";
 
 type Photo = {
   id: number;
-  caption: string;
+  src: string;
+  alt: string;
 };
 
-// Placeholder photos — replace with real photos in /public/galeria/.
-const PHOTOS: Photo[] = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  caption: `RUMBO — registro ${String(i + 1).padStart(2, "0")}`,
-}));
+const PHOTOS: Photo[] = Array.from({ length: 11 }, (_, i) => {
+  const n = String(i + 1).padStart(2, "0");
+  return {
+    id: i + 1,
+    src: `/galeria/galeria-${n}.jpg`,
+    alt: `RUMBO — registro ${n}`,
+  };
+});
 
 export function Galeria() {
   const [lightbox, setLightbox] = useState<Photo | null>(null);
@@ -39,17 +44,18 @@ export function Galeria() {
                 type="button"
                 onClick={() => setLightbox(photo)}
                 className="group relative block aspect-[4/5] w-full overflow-hidden border border-border bg-surface"
-                aria-label={`Abrir foto ${photo.id}`}
+                aria-label={`Abrir ${photo.alt}`}
               >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover grayscale-[0.2] transition-all duration-700 group-hover:scale-[1.04] group-hover:grayscale-0"
+                />
                 <span
                   aria-hidden
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <RumboMark className="h-10 w-auto text-text/15 transition-all duration-500 group-hover:scale-110 group-hover:text-text/30" />
-                </span>
-                <span
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60"
+                  className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-30"
                 />
               </button>
             </motion.li>
@@ -93,7 +99,7 @@ export function Galeria() {
             onClick={() => setLightbox(null)}
             role="dialog"
             aria-modal="true"
-            aria-label={lightbox.caption}
+            aria-label={lightbox.alt}
           >
             <button
               type="button"
@@ -111,12 +117,14 @@ export function Galeria() {
               className="relative aspect-[4/5] w-full max-w-2xl border border-border bg-surface"
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="absolute inset-0 flex items-center justify-center">
-                <RumboMark className="h-24 w-auto text-text/20" />
-              </span>
-              <span className="absolute bottom-4 left-4 font-mono text-xs uppercase tracking-widest2 text-text/70">
-                {lightbox.caption}
-              </span>
+              <Image
+                src={lightbox.src}
+                alt={lightbox.alt}
+                fill
+                sizes="(max-width: 768px) 90vw, 672px"
+                className="object-cover"
+                priority
+              />
             </motion.div>
           </motion.div>
         )}
