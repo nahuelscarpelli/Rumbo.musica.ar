@@ -181,6 +181,46 @@
   cursor: pointer;
 }
 
+/* Vertical fader (mixer console look) */
+.stem-fader-vertical {
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 6px;
+  height: 100%;
+  background: var(--color-border);
+  outline: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+.stem-fader-vertical:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.stem-fader-vertical::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 12px;
+  background: var(--fader-color, var(--color-accent));
+  border-radius: 2px;
+  border: 1px solid var(--color-bg);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.stem-fader-vertical::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+}
+.stem-fader-vertical::-moz-range-thumb {
+  width: 26px;
+  height: 12px;
+  background: var(--fader-color, var(--color-accent));
+  border-radius: 2px;
+  border: 1px solid var(--color-bg);
+  cursor: pointer;
+}
+
 /* Easter egg particles */
 @keyframes particle-rise {
   0% { transform: translateY(0) scale(1); opacity: 0; }
