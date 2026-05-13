@@ -27,10 +27,11 @@ type Refs = {
 
 const DEFAULT_STATE: Record<StemName, PerStemState> = {
   drums: { active: true, volume: 100, loaded: false },
-  vocals: { active: true, volume: 100, loaded: false },
+  bass: { active: true, volume: 100, loaded: false },
   guitars: { active: true, volume: 100, loaded: false },
-  keys: { active: true, volume: 100, loaded: false },
+  vocals: { active: true, volume: 100, loaded: false },
   fx: { active: true, volume: 100, loaded: false },
+  mix: { active: true, volume: 100, loaded: false },
 };
 
 export function useStemPlayer({ enabled }: { enabled: boolean }) {

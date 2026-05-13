@@ -1,4 +1,4 @@
-export const STEM_NAMES = ["drums", "vocals", "guitars", "keys", "fx"] as const;
+export const STEM_NAMES = ["drums", "bass", "guitars", "vocals", "fx", "mix"] as const;
 
 export type StemName = (typeof STEM_NAMES)[number];
 
@@ -11,10 +11,11 @@ export type StemMeta = {
 
 export const STEMS: StemMeta[] = [
   { name: "drums", label: "Batería", symbol: "BAT", color: "#c0392b" },
-  { name: "vocals", label: "Voz", symbol: "VOZ", color: "#e8d5b7" },
+  { name: "bass", label: "Bajo", symbol: "BJO", color: "#2980b9" },
   { name: "guitars", label: "Guitarras", symbol: "GTR", color: "#e67e22" },
-  { name: "keys", label: "Teclados", symbol: "TEC", color: "#2980b9" },
+  { name: "vocals", label: "Voz", symbol: "VOZ", color: "#e8d5b7" },
   { name: "fx", label: "FX", symbol: "FX", color: "#8e44ad" },
+  { name: "mix", label: "Mezcla", symbol: "MIX", color: "#16a085" },
 ];
 
 export function isStemName(value: string): value is StemName {

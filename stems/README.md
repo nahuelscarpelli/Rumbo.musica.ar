@@ -6,25 +6,27 @@ Los archivos se sirven mediante la API route protegida en
 
 ## Archivos esperados
 
-5 stems, mismo BPM y duración exacta (sincronizados al ms):
+6 stems, mismo BPM y duración exacta (sincronizados al ms):
 
 | Archivo | Pista |
 |---|---|
 | `drums.mp3` | Batería |
-| `vocals.mp3` | Voz |
+| `bass.mp3` | Bajo |
 | `guitars.mp3` | Guitarras |
-| `keys.mp3` | Teclados |
+| `vocals.mp3` | Voz |
 | `fx.mp3` | FX / sintes / texturas |
+| `mix.mp3` | Mezcla / otros instrumentos |
 
 ## Especificaciones
 
-- **Formato**: MP3 (192kbps mínimo) o WebM
+- **Formato**: MP3 **192 kbps** (sweet spot calidad/peso). Total ~30 MB
+  los 6 — debajo del límite de 50 MB de funciones serverless en Vercel.
 - **Sincronización**: mismo punto de inicio (silencio al comienzo si es
-  necesario para alinear todas las pistas al ms)
-- **Duración**: idéntica entre todos los archivos
-- **Loop-friendly**: que el final empalme con el comienzo sin click
+  necesario para alinear todas las pistas al ms).
+- **Duración**: idéntica entre todos los archivos.
+- **Loop-friendly**: que el final empalme con el comienzo sin click.
 - **Loudness**: normalizar todos los stems al mismo loudness (LUFS) para
-  que los faders se sientan parejos
+  que los faders se sientan parejos.
 
 ## Variables de entorno
 
@@ -37,7 +39,7 @@ Configurar en Vercel → Settings → Environment Variables.
 ## Notas
 
 - Los archivos se incluyen en el bundle de Vercel via `outputFileTracingIncludes`
-  en `next.config.mjs`. Tener cuidado con el tamaño total (50 MB de límite por
-  función serverless en plan gratuito).
-- Si hace falta cambiar la canción del player, reemplazar los 5 archivos y
+  en `next.config.mjs`. Cuidado con el tamaño total (50 MB de límite por
+  función serverless).
+- Si hace falta cambiar la canción del player, reemplazar los 6 archivos y
   actualizar `STEM_TRACK_NAME`.
