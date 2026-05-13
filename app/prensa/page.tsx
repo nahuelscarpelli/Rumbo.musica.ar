@@ -11,15 +11,6 @@ export const metadata: Metadata = {
     "Electronic Press Kit de RUMBO: biografía, integrantes, releases, rider técnico, fotos y links de descarga.",
 };
 
-const TECH_INFO = [
-  "16+ canales de entrada requeridos",
-  "Monitoreo: in-ears (preferido) / piso (adaptable)",
-  "Proyección HDMI sincronizada con secuencia",
-  "Energía: 220v × 4 tomas en escena",
-  "Duración del show: a consultar según formato",
-  "Capacidad de escenario: auditorios, teatros, festivales y espacios abiertos",
-];
-
 const DOWNLOADS = [
   { label: "Gacetilla de prensa", href: "/rumbo-gacetilla.pdf" },
   { label: "Rider técnico", href: "/rumbo-rider.pdf" },
@@ -168,23 +159,6 @@ export default function PrensaPage() {
                   <p className="mt-1 font-mono text-xs uppercase tracking-widest2 text-muted">
                     {m.role}
                   </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="mt-20">
-            <h2 className="font-display text-3xl uppercase tracking-wider2">
-              Información técnica
-            </h2>
-            <ul className="mt-6 flex flex-col">
-              {TECH_INFO.map((line, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 border-t border-border py-4 last:border-b"
-                >
-                  <span aria-hidden className="mt-2 block h-1.5 w-1.5 rotate-45 bg-accent" />
-                  <span className="text-text/80">{line}</span>
                 </li>
               ))}
             </ul>
