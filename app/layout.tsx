@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/ui/Cursor";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { MusicGroupSchema, WebsiteSchema } from "@/components/seo/StructuredData";
 
 const display = Anton({
@@ -116,6 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="grain-overlay min-h-screen bg-bg text-text antialiased">
         <Cursor />
         {children}
+        <WhatsAppFab />
       </body>
     </html>
   );
