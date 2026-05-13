@@ -14,7 +14,7 @@ const config: Config = {
         accent: "#c0392b",
         "accent-2": "#e8d5b7",
         text: "#f0f0f0",
-        muted: "#555555",
+        muted: "#8a8a8a",
         "show-bg": "#0a0a14",
       },
       fontFamily: {
