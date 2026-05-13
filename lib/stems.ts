@@ -15,7 +15,7 @@ export const STEMS: StemMeta[] = [
   { name: "guitars", label: "Guitarras", symbol: "GTR", color: "#e67e22" },
   { name: "vocals", label: "Voz", symbol: "VOZ", color: "#e8d5b7" },
   { name: "fx", label: "FX", symbol: "FX", color: "#8e44ad" },
-  { name: "mix", label: "Mezcla", symbol: "MIX", color: "#16a085" },
+  { name: "mix", label: "Teclados y más", symbol: "TEC", color: "#16a085" },
 ];
 
 export function isStemName(value: string): value is StemName {
