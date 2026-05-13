@@ -5,15 +5,6 @@ import Link from "next/link";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { CONTACT } from "@/lib/data";
 
-const TECH_INFO = [
-  "16+ canales de entrada requeridos",
-  "Monitoreo: in-ears (preferido) / piso (adaptable)",
-  "Proyección HDMI sincronizada con secuencia",
-  "Energía: 220v × 4 tomas en escena",
-  "Duración del show: a consultar según formato",
-  "Capacidad de escenario: auditorios, teatros, festivales y espacios abiertos",
-];
-
 const DOWNLOADS = [
   {
     label: "Gacetilla de prensa",
@@ -74,44 +65,23 @@ export function Prensa() {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-16 flex flex-col gap-6 border border-border bg-surface p-8 lg:max-w-2xl">
           <div>
-            <p className="eyebrow">Información técnica rápida</p>
-            <ul className="mt-6 flex flex-col">
-              {TECH_INFO.map((line, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.04 }}
-                  className="flex items-start gap-3 border-t border-border py-3 last:border-b"
-                >
-                  <span aria-hidden className="mt-2 block h-1.5 w-1.5 rotate-45 bg-accent" />
-                  <span className="text-sm text-text/80 md:text-base">{line}</span>
-                </motion.li>
-              ))}
-            </ul>
+            <p className="eyebrow">Marca registrada</p>
+            <p className="mt-3 font-display text-2xl uppercase tracking-wider2">
+              {CONTACT.inpi}
+            </p>
           </div>
-
-          <div className="flex flex-col gap-6 border border-border bg-surface p-8">
-            <div>
-              <p className="eyebrow">Marca registrada</p>
-              <p className="mt-3 font-display text-2xl uppercase tracking-wider2">
-                {CONTACT.inpi}
-              </p>
-            </div>
-            <div className="divider-diag" />
-            <div>
-              <p className="eyebrow">EPK ampliado</p>
-              <p className="mt-3 text-sm text-text/70">
-                ¿Querés más información, biografía completa, links a streaming y
-                materiales editoriales?
-              </p>
-              <Link href="/prensa" className="btn-ghost mt-5 self-start">
-                Ver EPK completo
-              </Link>
-            </div>
+          <div className="divider-diag" />
+          <div>
+            <p className="eyebrow">EPK ampliado</p>
+            <p className="mt-3 text-sm text-text/70">
+              ¿Querés más información, biografía completa, links a streaming y
+              materiales editoriales?
+            </p>
+            <Link href="/prensa" className="btn-ghost mt-5 self-start">
+              Ver EPK completo
+            </Link>
           </div>
         </div>
       </div>
