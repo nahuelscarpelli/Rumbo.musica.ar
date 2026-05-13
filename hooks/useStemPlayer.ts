@@ -76,24 +76,41 @@ export function useStemPlayer({ enabled }: { enabled: boolean }) {
     };
   }, [enabled]);
 
+  // Ensure AudioContext exists. MUST be called synchronously from a user
+  // gesture (click) so iOS Safari recognises it as user-initiated. Returns
+  // the context. resume() is kicked off synchronously to unlock playback on
+  // mobile browsers (iOS / Android Chrome).
+  const ensureContext = useCallback(() => {
+    if (refs.current.ctx) return refs.current.ctx;
+    const Ctx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext;
+    const ctx = new Ctx();
+    // Kick off resume in the same sync tick as the user gesture.
+    ctx.resume().catch(() => {
+      /* ignore — explicit resume happens later */
+    });
+    refs.current.ctx = ctx;
+    const master = ctx.createGain();
+    master.gain.value = 1;
+    master.connect(ctx.destination);
+    refs.current.master = master;
+    return ctx;
+  }, []);
+
   // Load + decode stems once meta says ready
   const loadAll = useCallback(async () => {
     if (loadState === "loading" || loadState === "ready") return;
     if (typeof window === "undefined") return;
+    const ctx = refs.current.ctx;
+    const master = refs.current.master;
+    if (!ctx || !master) return;
 
     setLoadState("loading");
     setLoadProgress(0);
 
     try {
-      const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      const ctx = new Ctx();
-      refs.current.ctx = ctx;
-
-      const master = ctx.createGain();
-      master.gain.value = 1;
-      master.connect(ctx.destination);
-      refs.current.master = master;
-
       let done = 0;
       const total = STEM_NAMES.length;
 
@@ -186,22 +203,43 @@ export function useStemPlayer({ enabled }: { enabled: boolean }) {
   }, []);
 
   const play = useCallback(async () => {
+    // 1. Create + unlock AudioContext within the user gesture (iOS Safari)
+    const ctx = ensureContext();
+
+    // 2. Make sure it's running (Android Chrome may need an explicit resume)
+    if (ctx.state === "suspended") {
+      try {
+        await ctx.resume();
+      } catch {
+        /* noop */
+      }
+    }
+
+    // 3. Load buffers if first time
     if (loadState === "idle") {
       await loadAll();
     }
-    const ctx = refs.current.ctx;
-    if (!ctx || loadState === "error") return;
 
-    if (ctx.state === "suspended") await ctx.resume();
+    // 4. Abort if loading failed (read via refs since closure state is stale)
+    if (Object.keys(refs.current.buffers).length === 0) return;
 
-    // Apply current gains before starting
+    // 5. Re-resume after the long decode/fetch in case the context dropped
+    if (ctx.state === "suspended") {
+      try {
+        await ctx.resume();
+      } catch {
+        /* noop */
+      }
+    }
+
+    // 6. Apply current gains and start
     for (const name of STEM_NAMES) {
       applyGain(name, stems[name], solo);
     }
 
     startSources(refs.current.pausedAt);
     setIsPlaying(true);
-  }, [applyGain, loadAll, loadState, solo, startSources, stems]);
+  }, [applyGain, ensureContext, loadAll, loadState, solo, startSources, stems]);
 
   const pause = useCallback(() => {
     const ctx = refs.current.ctx;

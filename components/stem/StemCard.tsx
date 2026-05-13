@@ -29,7 +29,7 @@ export function StemCard({
 
   return (
     <div
-      className={`relative flex flex-col gap-4 border bg-bg/60 p-5 backdrop-blur-sm transition-all duration-300 ${
+      className={`relative flex flex-col gap-3 border bg-bg/60 p-4 backdrop-blur-sm transition-all duration-300 ${
         isActive ? "border-2" : "border border-border opacity-60"
       } ${disabled ? "opacity-30" : ""} ${isSolo ? "ring-1 ring-offset-2 ring-offset-bg" : ""}`}
       style={{
@@ -48,7 +48,7 @@ export function StemCard({
       >
         <span className="flex items-center gap-3">
           <span
-            className="grid h-9 w-9 place-items-center border font-mono text-[10px] font-bold uppercase tracking-widest2"
+            className="grid h-8 w-8 place-items-center border font-mono text-[10px] font-bold uppercase tracking-widest2"
             style={{
               borderColor: stem.color,
               color: isActive ? stem.color : "var(--color-muted)",
@@ -56,7 +56,7 @@ export function StemCard({
           >
             {stem.symbol}
           </span>
-          <span className="font-display text-xl uppercase tracking-wider2">
+          <span className="font-display text-base uppercase tracking-wider2 md:text-lg">
             {stem.label}
           </span>
         </span>
@@ -69,7 +69,7 @@ export function StemCard({
       </button>
 
       {/* Visualizer */}
-      <div className="h-14 px-1">
+      <div className="h-10 px-1">
         <StemVisualizer
           active={isActive}
           color={stem.color}
@@ -104,7 +104,7 @@ export function StemCard({
         onClick={onSolo}
         disabled={disabled}
         aria-pressed={isSolo}
-        className={`border px-3 py-2 font-mono text-[10px] uppercase tracking-widest2 transition-colors disabled:cursor-not-allowed ${
+        className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 transition-colors disabled:cursor-not-allowed ${
           isSolo
             ? "border-text bg-text text-bg"
             : "border-border text-text/70 hover:border-text hover:text-text"

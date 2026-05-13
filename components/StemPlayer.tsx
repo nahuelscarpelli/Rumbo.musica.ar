@@ -18,8 +18,6 @@ function formatTime(s: number): string {
 export function StemPlayer() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
-  const [showEgg, setShowEgg] = useState(false);
-  const eggFiredRef = useRef(false);
 
   // Lazy-enable when in viewport
   useEffect(() => {
@@ -52,7 +50,6 @@ export function StemPlayer() {
     currentTime,
     duration,
     activeCount,
-    allMaxed,
     play,
     pause,
     reset,
@@ -61,19 +58,6 @@ export function StemPlayer() {
     toggleSolo,
     getLevel,
   } = useStemPlayer({ enabled });
-
-  // Easter egg trigger
-  useEffect(() => {
-    if (allMaxed && !eggFiredRef.current && loadState === "ready") {
-      eggFiredRef.current = true;
-      setShowEgg(true);
-      const t = setTimeout(() => setShowEgg(false), 2400);
-      return () => clearTimeout(t);
-    }
-    if (!allMaxed) {
-      eggFiredRef.current = false;
-    }
-  }, [allMaxed, loadState]);
 
   // Background intensity based on active layers (0..1)
   const intensity = Math.min(activeCount / STEMS.length, 1);
@@ -85,7 +69,7 @@ export function StemPlayer() {
     <section
       id="arma-el-rumbo"
       ref={sectionRef}
-      className="relative isolate overflow-hidden bg-bg py-24 md:py-32"
+      className="relative isolate overflow-hidden bg-bg py-16 md:py-20"
     >
       {/* Narrative background — darkens to lit gradient */}
       <div
@@ -108,14 +92,14 @@ export function StemPlayer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
-          className="mt-8 max-w-xl text-balance text-lg text-text/80 md:text-xl"
+          className="mt-6 max-w-xl text-balance text-base text-text/80 md:text-lg"
         >
           Cada capa es parte de algo más grande. Armá el sonido.
         </motion.p>
 
         {/* Track name + progress */}
-        <div className="mt-10 flex flex-col gap-2 border-y border-border py-4 md:flex-row md:items-center md:justify-between md:gap-6">
-          <span className="font-display text-xl uppercase tracking-wider2 text-accent-2">
+        <div className="mt-6 flex flex-col gap-2 border-y border-border py-3 md:flex-row md:items-center md:justify-between md:gap-6">
+          <span className="font-display text-base uppercase tracking-wider2 text-accent-2 md:text-lg">
             {trackName}
           </span>
           <div className="flex items-center gap-3 font-mono text-xs text-muted">
@@ -134,8 +118,8 @@ export function StemPlayer() {
 
         {/* Loading / unavailable state */}
         {!stemsAvailable && (
-          <div className="mt-10 flex flex-col items-center gap-4 border border-dashed border-border bg-surface/40 p-12 text-center">
-            <RumboMark className="h-12 w-auto text-text/30" />
+          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-8 text-center">
+            <RumboMark className="h-10 w-auto text-text/30" />
             <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
               Preparando capas
             </p>
@@ -156,8 +140,8 @@ export function StemPlayer() {
         )}
 
         {stemsAvailable && loadState !== "ready" && (
-          <div className="mt-10 flex flex-col items-center gap-4 border border-dashed border-border bg-surface/40 p-12 text-center">
-            <RumboMark className="h-10 w-auto text-text/30" />
+          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-8 text-center">
+            <RumboMark className="h-9 w-auto text-text/30" />
             <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
               {loadState === "error"
                 ? "No se pudieron cargar las capas"
@@ -183,7 +167,7 @@ export function StemPlayer() {
 
         {/* Stem grid */}
         {stemsAvailable && (
-          <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {STEMS.map((stem) => (
               <li key={stem.name}>
                 <StemCard
@@ -203,7 +187,7 @@ export function StemPlayer() {
 
         {/* Transport */}
         {stemsAvailable && (
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               onClick={isPlaying ? pause : play}
@@ -215,33 +199,6 @@ export function StemPlayer() {
             <button type="button" onClick={reset} className="btn-ghost">
               ↺ Resetear
             </button>
-          </div>
-        )}
-
-        {/* Easter egg overlay */}
-        {showEgg && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
-          >
-            {/* Particles */}
-            {Array.from({ length: 24 }).map((_, i) => (
-              <span
-                key={i}
-                className="stem-particle"
-                style={{
-                  left: `${(i / 24) * 100}%`,
-                  animationDelay: `${(i % 6) * 0.15}s`,
-                  animationDuration: `${1.6 + (i % 4) * 0.3}s`,
-                }}
-              />
-            ))}
-            <div className="stem-logo-pulse flex flex-col items-center gap-4">
-              <RumboMark className="h-24 w-auto text-accent" />
-              <span className="font-display text-3xl uppercase tracking-wider2 text-text md:text-5xl">
-                Esto es RUMBO.
-              </span>
-            </div>
           </div>
         )}
       </div>
