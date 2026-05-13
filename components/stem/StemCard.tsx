@@ -2,14 +2,12 @@
 
 import type { StemMeta } from "@/lib/stems";
 import type { PerStemState } from "@/hooks/useStemPlayer";
-import { StemVisualizer } from "./StemVisualizer";
 
 type Props = {
   stem: StemMeta;
   state: PerStemState;
   isSolo: boolean;
   disabled: boolean;
-  getLevel: () => number;
   onToggle: () => void;
   onVolume: (value: number) => void;
   onSolo: () => void;
@@ -20,7 +18,6 @@ export function StemCard({
   state,
   isSolo,
   disabled,
-  getLevel,
   onToggle,
   onVolume,
   onSolo,
@@ -29,61 +26,29 @@ export function StemCard({
 
   return (
     <div
-      className={`relative flex flex-col gap-3 border bg-bg/60 p-4 backdrop-blur-sm transition-all duration-300 ${
-        isActive ? "border-2" : "border border-border opacity-60"
-      } ${disabled ? "opacity-30" : ""} ${isSolo ? "ring-1 ring-offset-2 ring-offset-bg" : ""}`}
+      className={`flex h-full flex-col items-center gap-2 border bg-bg/60 px-1.5 py-3 backdrop-blur-sm transition-all duration-300 sm:px-2 sm:py-4 ${
+        isActive ? "border-2" : "border-border opacity-60"
+      } ${disabled ? "opacity-30" : ""}`}
       style={{
         borderColor: isActive ? stem.color : undefined,
-        boxShadow: isSolo ? `0 0 24px -8px ${stem.color}` : undefined,
+        boxShadow: isSolo ? `0 0 16px -6px ${stem.color}` : undefined,
       }}
     >
-      {/* Header: symbol + label + toggle */}
-      <button
-        type="button"
-        onClick={onToggle}
-        disabled={disabled}
-        className="flex items-center justify-between gap-3 text-left disabled:cursor-not-allowed"
-        aria-pressed={isActive}
-        aria-label={`${isActive ? "Apagar" : "Encender"} ${stem.label}`}
+      {/* Symbol */}
+      <span
+        className="font-mono text-[10px] font-bold uppercase tracking-widest2 transition-colors"
+        style={{ color: isActive ? stem.color : "var(--color-muted)" }}
       >
-        <span className="flex items-center gap-3">
-          <span
-            className="grid h-8 w-8 place-items-center border font-mono text-[10px] font-bold uppercase tracking-widest2"
-            style={{
-              borderColor: stem.color,
-              color: isActive ? stem.color : "var(--color-muted)",
-            }}
-          >
-            {stem.symbol}
-          </span>
-          <span className="font-display text-base uppercase tracking-wider2 md:text-lg">
-            {stem.label}
-          </span>
-        </span>
-        <span
-          className={`block h-2.5 w-2.5 rounded-full transition-colors ${
-            isActive ? "" : "bg-muted"
-          }`}
-          style={{ backgroundColor: isActive ? stem.color : undefined }}
-        />
-      </button>
+        {stem.symbol}
+      </span>
 
-      {/* Visualizer */}
-      <div className="h-10 px-1">
-        <StemVisualizer
-          active={isActive}
-          color={stem.color}
-          getLevel={getLevel}
-          expanded={isSolo}
-        />
-      </div>
+      {/* Volume number */}
+      <span className="font-mono text-[10px] tabular-nums text-muted">
+        {state.volume}
+      </span>
 
-      {/* Volume fader */}
-      <label className="flex flex-col gap-2">
-        <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-muted">
-          <span>Volumen</span>
-          <span>{state.volume}</span>
-        </span>
+      {/* Vertical fader */}
+      <div className="flex h-36 w-full items-center justify-center sm:h-44">
         <input
           type="range"
           min={0}
@@ -93,24 +58,43 @@ export function StemCard({
           onChange={(e) => onVolume(Number(e.target.value))}
           disabled={disabled || !isActive}
           aria-label={`Volumen ${stem.label}`}
-          className="stem-fader"
+          className="stem-fader-vertical"
           style={{ ["--fader-color" as string]: stem.color }}
         />
-      </label>
+      </div>
 
-      {/* Solo button */}
+      {/* On/off toggle (colored dot) */}
+      <button
+        type="button"
+        onClick={onToggle}
+        disabled={disabled}
+        aria-pressed={isActive}
+        aria-label={`${isActive ? "Apagar" : "Encender"} ${stem.label}`}
+        className="grid h-5 w-5 place-items-center rounded-full border transition-colors disabled:cursor-not-allowed"
+        style={{
+          borderColor: isActive ? stem.color : "var(--color-border)",
+          backgroundColor: isActive ? stem.color : "transparent",
+        }}
+      />
+
+      {/* Label */}
+      <span className="line-clamp-2 min-h-[2em] text-center font-mono text-[9px] uppercase leading-tight tracking-widest2 text-text/70 sm:text-[10px]">
+        {stem.label}
+      </span>
+
+      {/* Solo */}
       <button
         type="button"
         onClick={onSolo}
         disabled={disabled}
         aria-pressed={isSolo}
-        className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 transition-colors disabled:cursor-not-allowed ${
+        className={`w-full border py-1 font-mono text-[9px] uppercase tracking-widest2 transition-colors disabled:cursor-not-allowed sm:text-[10px] ${
           isSolo
             ? "border-text bg-text text-bg"
             : "border-border text-text/70 hover:border-text hover:text-text"
         }`}
       >
-        {isSolo ? "★ Solo" : "Solo"}
+        {isSolo ? "★" : "S"}
       </button>
     </div>
   );

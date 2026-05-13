@@ -19,7 +19,6 @@ export function StemPlayer() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
 
-  // Lazy-enable when in viewport
   useEffect(() => {
     if (typeof window === "undefined") return;
     const el = sectionRef.current;
@@ -56,22 +55,19 @@ export function StemPlayer() {
     toggleStem,
     setVolume,
     toggleSolo,
-    getLevel,
   } = useStemPlayer({ enabled });
 
-  // Background intensity based on active layers (0..1)
   const intensity = Math.min(activeCount / STEMS.length, 1);
-
   const trackName = meta.track ?? "Próxima canción";
   const stemsAvailable = meta.ready;
+  const ready = stemsAvailable && loadState === "ready";
 
   return (
     <section
       id="arma-el-rumbo"
       ref={sectionRef}
-      className="relative isolate overflow-hidden bg-bg py-16 md:py-20"
+      className="relative isolate overflow-hidden bg-bg py-14 md:py-20"
     >
-      {/* Narrative background — darkens to lit gradient */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 transition-[opacity,background] duration-1000"
@@ -92,19 +88,41 @@ export function StemPlayer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
-          className="mt-6 max-w-xl text-balance text-base text-text/80 md:text-lg"
+          className="mt-4 max-w-xl text-balance text-sm text-text/80 md:text-base"
         >
           Cada capa es parte de algo más grande. Armá el sonido.
         </motion.p>
 
-        {/* Track name + progress */}
-        <div className="mt-6 flex flex-col gap-2 border-y border-border py-3 md:flex-row md:items-center md:justify-between md:gap-6">
+        {/* Header: track / transport / progress */}
+        <div className="mt-6 flex flex-col gap-3 border-y border-border py-3 md:flex-row md:items-center md:gap-6">
           <span className="font-display text-base uppercase tracking-wider2 text-accent-2 md:text-lg">
             {trackName}
           </span>
-          <div className="flex items-center gap-3 font-mono text-xs text-muted">
+
+          {ready && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={isPlaying ? pause : play}
+                aria-label={isPlaying ? "Pausar" : "Reproducir"}
+                className="grid h-9 w-9 place-items-center border border-text/60 text-sm transition-colors hover:border-accent hover:text-accent"
+              >
+                {isPlaying ? "❚❚" : "▶"}
+              </button>
+              <button
+                type="button"
+                onClick={reset}
+                aria-label="Resetear"
+                className="grid h-9 w-9 place-items-center border border-border text-sm text-text/60 transition-colors hover:border-text hover:text-text"
+              >
+                ↺
+              </button>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2 font-mono text-xs text-muted md:ml-auto">
             <span className="tabular-nums">{formatTime(currentTime)}</span>
-            <span className="relative h-1 flex-1 bg-border md:w-72 md:flex-none">
+            <span className="relative h-1 flex-1 bg-border md:w-48 md:flex-none">
               <span
                 className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-100"
                 style={{
@@ -116,32 +134,21 @@ export function StemPlayer() {
           </div>
         </div>
 
-        {/* Loading / unavailable state */}
+        {/* States: stems unavailable / loading / error */}
         {!stemsAvailable && (
-          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-8 text-center">
-            <RumboMark className="h-10 w-auto text-text/30" />
+          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-6 text-center">
+            <RumboMark className="h-9 w-auto text-text/30" />
             <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
               Preparando capas
             </p>
             <p className="max-w-md text-sm text-text/60">
               El stem player se activa cuando subamos los archivos de audio.
-              Mientras tanto, podés escucharnos en{" "}
-              <a
-                href="https://open.spotify.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-2 underline-offset-4 hover:underline"
-              >
-                Spotify
-              </a>
-              .
             </p>
           </div>
         )}
 
         {stemsAvailable && loadState !== "ready" && (
-          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-8 text-center">
-            <RumboMark className="h-9 w-auto text-text/30" />
+          <div className="mt-6 flex flex-col items-center gap-3 border border-dashed border-border bg-surface/40 p-6 text-center">
             <p className="font-mono text-xs uppercase tracking-widest2 text-muted">
               {loadState === "error"
                 ? "No se pudieron cargar las capas"
@@ -158,24 +165,23 @@ export function StemPlayer() {
               </span>
             )}
             {(loadState === "idle" || loadState === "error") && (
-              <button type="button" onClick={play} className="btn-ghost mt-2">
+              <button type="button" onClick={play} className="btn-ghost mt-1">
                 {loadState === "error" ? "Reintentar" : "Cargar capas"}
               </button>
             )}
           </div>
         )}
 
-        {/* Stem grid */}
-        {stemsAvailable && (
-          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Mixer console: 6 vertical channels */}
+        {ready && (
+          <ul className="mt-6 flex justify-between gap-1.5 sm:gap-3">
             {STEMS.map((stem) => (
-              <li key={stem.name}>
+              <li key={stem.name} className="flex-1">
                 <StemCard
                   stem={stem}
                   state={stems[stem.name]}
                   isSolo={solo === stem.name}
                   disabled={loadState !== "ready"}
-                  getLevel={() => getLevel(stem.name)}
                   onToggle={() => toggleStem(stem.name)}
                   onVolume={(v) => setVolume(stem.name, v)}
                   onSolo={() => toggleSolo(stem.name)}
@@ -183,23 +189,6 @@ export function StemPlayer() {
               </li>
             ))}
           </ul>
-        )}
-
-        {/* Transport */}
-        {stemsAvailable && (
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={isPlaying ? pause : play}
-              disabled={loadState === "error"}
-              className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isPlaying ? "❚❚ Pausar" : "▶ Reproducir"}
-            </button>
-            <button type="button" onClick={reset} className="btn-ghost">
-              ↺ Resetear
-            </button>
-          </div>
         )}
       </div>
     </section>
