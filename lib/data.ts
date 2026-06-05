@@ -80,9 +80,12 @@ export const ACTS: Act[] = [
 ];
 
 export const UPCOMING_DATES: ShowDate[] = [
-  // Cuando haya fechas confirmadas, agregarlas aquí.
-  // Ejemplo:
-  // { date: "12 OCT 2026", event: "Del Silencio a la Luna", location: "Teatro Independencia, Mendoza", upcoming: true, ticketUrl: "#" },
+  {
+    date: "10 SEP 2026",
+    event: "Del Silencio a la Luna",
+    location: "La Nave Cultural, Mendoza",
+    upcoming: true,
+  },
 ];
 
 export const SOUND_TAGS = [
