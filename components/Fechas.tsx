@@ -37,11 +37,32 @@ export function Fechas() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="grid grid-cols-1 gap-2 border-t border-border py-6 last:border-b md:grid-cols-[160px_1fr_auto] md:items-center md:gap-8"
+                  className={`grid grid-cols-1 gap-2 border-t border-border py-6 last:border-b md:grid-cols-[180px_1fr_auto] md:items-center md:gap-8 ${
+                    d.featured ? "relative" : ""
+                  }`}
                 >
-                  <span className="font-display text-2xl uppercase tracking-wider2 text-accent-2">
-                    {d.date}
-                  </span>
+                  {d.featured && (
+                    <span
+                      aria-hidden
+                      className="absolute inset-y-0 -left-3 w-0.5 bg-accent md:-left-4"
+                    />
+                  )}
+                  <div className="flex flex-col gap-1">
+                    {d.featured && (
+                      <span className="inline-flex w-fit items-center gap-1.5 border border-accent bg-accent/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest2 text-accent">
+                        <span aria-hidden className="block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+                        Próximo show
+                      </span>
+                    )}
+                    <span className="font-display text-2xl uppercase tracking-wider2 text-accent-2">
+                      {d.date}
+                    </span>
+                    {d.time && (
+                      <span className="font-mono text-xs uppercase tracking-widest2 text-text/70">
+                        {d.time}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex flex-col">
                     <span className="font-display text-xl uppercase tracking-wider2 md:text-2xl">
                       {d.event}
@@ -50,7 +71,7 @@ export function Fechas() {
                       {d.location}
                     </span>
                   </div>
-                  {d.ticketUrl && (
+                  {d.ticketUrl ? (
                     <a
                       href={d.ticketUrl}
                       target="_blank"
@@ -59,6 +80,10 @@ export function Fechas() {
                     >
                       Entradas
                     </a>
+                  ) : (
+                    <span className="font-mono text-[10px] uppercase tracking-widest2 text-muted md:justify-self-end">
+                      Entradas próximamente
+                    </span>
                   )}
                 </motion.li>
               ))}
