@@ -54,7 +54,7 @@ export function Show() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-8 font-mono text-sm uppercase tracking-widest2 text-text/70"
         >
-          Teatro Independencia · Mendoza
+          Nave Cultural · Mendoza
         </motion.p>
 
         <motion.p
