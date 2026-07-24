@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ACTS } from "@/lib/data";
+import { ACTS, UPCOMING_DATES } from "@/lib/data";
 
 export function Show() {
+  const featured = UPCOMING_DATES.find((d) => d.featured) ?? UPCOMING_DATES[0];
+  const ticketUrl = featured?.ticketUrl;
+
   return (
     <section
       id="show"
@@ -141,9 +144,20 @@ export function Show() {
         </div>
 
         <div className="mt-16 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <a href="#contacto" className="btn-primary">
-            Quiero mi entrada
-          </a>
+          {ticketUrl ? (
+            <a
+              href={ticketUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Quiero mi entrada
+            </a>
+          ) : (
+            <a href="#fechas" className="btn-primary">
+              Quiero mi entrada
+            </a>
+          )}
           <a href="#contacto" className="btn-ghost">
             Programar el show
           </a>
