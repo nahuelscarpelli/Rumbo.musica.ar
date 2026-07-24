@@ -84,7 +84,7 @@ export const ACTS: Act[] = [
 export const UPCOMING_DATES: ShowDate[] = [
   {
     date: "JUE 10 SEP 2026",
-    time: "21:00 hs",
+    time: "20:30 hs",
     event: "Del Silencio a la Luna",
     location: "Nave Cultural, Mendoza",
     upcoming: true,
