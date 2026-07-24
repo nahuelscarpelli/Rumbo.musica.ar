@@ -89,6 +89,7 @@ export const UPCOMING_DATES: ShowDate[] = [
     location: "Nave Cultural, Mendoza",
     upcoming: true,
     featured: true,
+    ticketUrl: "https://www.entradaweb.com.ar/evento/4a801dbb/step/1",
   },
 ];
 
