@@ -69,7 +69,10 @@ export const RELEASES: Release[] = [
   {
     title: "Zamba para no morir",
     description: "feat. Cristian Soloa",
-    comingSoon: true,
+    spotifyTrackId: "5xrYknAHFrMa9zAcJKtvga",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/5xrYknAHFrMa9zAcJKtvga",
+    youtubeId: "n7ipMbGUwg0",
+    youtubeUrl: "https://youtu.be/n7ipMbGUwg0",
   },
 ];
 
