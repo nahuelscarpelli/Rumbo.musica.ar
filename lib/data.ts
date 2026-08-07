@@ -28,7 +28,7 @@ export type ShowDate = {
 
 export type Act = {
   number: string;
-  title: string;
+   title: string;
   tagline: string;
 };
 
