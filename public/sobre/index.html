@@ -9,7 +9,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <!--
+    Anton = brand wordmark (unchanged).
+    Special Elite = typewriter body font, matches Lumios Typewriter Old
+    from Martina's card. To swap for the real Lumios: drop the .woff2 in
+    /public/sobre/fonts/ and replace the Google Fonts <link> with an
+    @font-face rule pointing to it. Keep --font-body untouched.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap" rel="stylesheet" />
   <!-- Preload the hero image so Act 1.5 doesn't flash -->
   <link rel="preload" as="image" href="valles.png" />
 
@@ -28,7 +35,8 @@
       --gray: #888880;
 
       --font-display: 'Anton', 'Impact', sans-serif;
-      --font-body: Georgia, 'Times New Roman', serif;
+      /* Special Elite matches the Lumios Typewriter Old used in the card */
+      --font-body: 'Special Elite', 'Courier New', Courier, monospace;
 
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
@@ -158,10 +166,10 @@
 
     .hint {
       font-family: var(--font-body);
-      font-style: italic;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--gray);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
       animation: hint-pulse 2s ease-in-out infinite;
     }
     @keyframes hint-pulse {
@@ -314,10 +322,10 @@
 
     .wordmark-sub {
       font-family: var(--font-body);
-      font-style: italic;
-      font-size: clamp(15px, 4.2vw, 20px);
+      font-size: clamp(14px, 3.6vw, 17px);
       color: var(--gray);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.16em;
+      text-transform: lowercase;
       opacity: 0;
       transform: translateY(10px);
       filter: blur(6px);
@@ -349,10 +357,10 @@
     #scene-lit.is-lit .scroll-cue { opacity: 0.6; }
     .scroll-cue-label {
       font-family: var(--font-body);
-      font-style: italic;
       color: var(--gray);
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: lowercase;
     }
     .scroll-cue-line {
       width: 1px;
@@ -407,10 +415,10 @@
 
     .pretext {
       font-family: var(--font-body);
-      font-style: italic;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--gray);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
+      text-transform: lowercase;
       text-align: center;
     }
 
@@ -433,12 +441,12 @@
 
     .community-text {
       font-family: var(--font-body);
-      font-style: italic;
-      font-size: clamp(16px, 4.2vw, 20px);
+      font-size: clamp(15px, 3.8vw, 18px);
       color: var(--white);
       opacity: 0.9;
       text-align: center;
-      line-height: 1.5;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
       max-width: 460px;
       padding: 0 8px;
     }
@@ -497,7 +505,7 @@
       fill: var(--white);
       transition: fill 0.35s var(--ease-in-out-cubic);
     }
-    .btn span { font-family: var(--font-body); font-style: italic; }
+    .btn span { font-family: var(--font-body); letter-spacing: 0.02em; }
 
     .footer-sig {
       margin-top: 24px;
