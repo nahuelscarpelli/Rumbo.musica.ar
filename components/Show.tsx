@@ -57,7 +57,19 @@ export function Show() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-8 font-mono text-sm uppercase tracking-widest2 text-text/70"
         >
-          Nave Cultural · Mendoza
+          {featured?.location ?? "Nave Cultural · Mendoza"}
+          {featured?.date && (
+            <>
+              <span aria-hidden className="mx-2 text-accent">·</span>
+              <span className="text-accent-2">{featured.date}</span>
+              {featured.time && (
+                <>
+                  <span aria-hidden className="mx-2 text-accent">·</span>
+                  <span className="text-accent-2">{featured.time}</span>
+                </>
+              )}
+            </>
+          )}
         </motion.p>
 
         <motion.p
