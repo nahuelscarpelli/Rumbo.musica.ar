@@ -2,6 +2,8 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /sobre/
+Disallow: /sobre
 
 # Block AI scrapers (uncomment if you want to opt out)
 # User-agent: GPTBot
