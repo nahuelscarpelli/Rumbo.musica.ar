@@ -17,8 +17,6 @@
     @font-face rule pointing to it. Keep --font-body untouched.
   -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap" rel="stylesheet" />
-  <!-- Preload the hero image so Act 1.5 doesn't flash -->
-  <link rel="preload" as="image" href="/sobre/valles.png" />
 
   <style>
     /* =====================================================================
@@ -175,43 +173,6 @@
     @keyframes hint-pulse {
       0%, 100% { opacity: 0.3; }
       50%      { opacity: 0.85; }
-    }
-
-    /* =====================================================================
-       Act 1.5 — Valles image (Ken Burns + slow reveal + fade to warm)
-       ================================================================== */
-    #scene-image {
-      padding: 0;
-      overflow: hidden;
-    }
-    .image-wrap {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-    .valles-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      /* contain = the full card is always visible, no text gets cropped */
-      object-fit: contain;
-      object-position: center;
-      /* Subtle Ken Burns — never large enough to push the artwork off-screen */
-      transform: scale(1);
-      transition: transform 6s linear;
-      will-change: transform;
-    }
-    #scene-image.is-visible .valles-image {
-      transform: scale(1.04);
-    }
-    /* Very light warm halo to bridge into Act 2 without covering the text */
-    .image-vignette {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(10, 10, 10, 0.35) 95%, rgba(10, 10, 10, 0.7) 100%);
     }
 
     /* =====================================================================
@@ -520,7 +481,7 @@
        Reduced motion — skip choreography, land on Act 3 with the warm bg
        ================================================================== */
     @media (prefers-reduced-motion: reduce) {
-      .scene, .valles-image,
+      .scene,
       .lighting-base, .lighting-rise,
       .wordmark-title .letter-char, .wordmark-line, .wordmark-sub,
       .scroll-cue-line, .envelope,
@@ -595,20 +556,6 @@
         </svg>
       </button>
       <p class="hint">abrí el sobre</p>
-    </section>
-
-    <!-- ACT 1.5 — Full-screen valles image with Ken Burns + vignette -->
-    <section id="scene-image" class="scene" aria-hidden="true">
-      <div class="image-wrap">
-        <img
-          src="/sobre/valles.png"
-          alt=""
-          class="valles-image"
-          loading="eager"
-          decoding="async"
-        />
-        <div class="image-vignette" aria-hidden="true"></div>
-      </div>
     </section>
 
     <!-- ACT 2 — Sunrise + wordmark reveal -->
@@ -705,7 +652,6 @@
 
     // Timings (ms)
     const FLAP_MS = 900;          // envelope flap opens
-    const IMAGE_HOLD_MS = 4000;   // Ken Burns hold
     const LIGHTING_MS = 8000;     // sunrise duration
     const WORDMARK_TAIL_MS = 2500; // extra beat after light finishes
 
@@ -722,7 +668,6 @@
     // Elements
     // ------------------------------------------------------------------
     const sceneEnvelope = document.getElementById("scene-envelope");
-    const sceneImage = document.getElementById("scene-image");
     const sceneLit = document.getElementById("scene-lit");
     const act3 = document.getElementById("act-3");
     const envelope = document.querySelector(".envelope");
@@ -738,25 +683,17 @@
     }
 
     // ------------------------------------------------------------------
-    // Sequence — Act 1 → 1.5 → 2 → 3
+    // Sequence — Act 1 → 2 → 3
     // ------------------------------------------------------------------
     function openEnvelope() {
       if (envelope.classList.contains("is-open")) return;
       envelope.classList.add("is-open");
-      setTimeout(showImage, FLAP_MS);
-    }
-
-    function showImage() {
-      // Crossfade: envelope out, image in (both at once, no black gap)
-      sceneEnvelope.classList.remove("is-visible");
-      sceneImage.classList.add("is-visible");
-      sceneImage.setAttribute("aria-hidden", "false");
-      setTimeout(startSunrise, IMAGE_HOLD_MS);
+      setTimeout(startSunrise, FLAP_MS);
     }
 
     function startSunrise() {
-      // Crossfade image → dark stage, then light rises
-      sceneImage.classList.remove("is-visible");
+      // Crossfade envelope → dark stage, then light rises
+      sceneEnvelope.classList.remove("is-visible");
       sceneLit.classList.add("is-visible");
       sceneLit.setAttribute("aria-hidden", "false");
 
