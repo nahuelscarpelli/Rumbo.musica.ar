@@ -301,6 +301,95 @@
       filter: blur(0);
     }
 
+    /* =====================================================================
+       Falling leaves (Mendoza vid) — layered inside Act 2
+       One "hero" leaf zig-zags in front of the wordmark; two background
+       leaves drift past at lower opacity to give depth. All hidden by
+       default; the scene reveals them once .is-lit fires.
+       ================================================================== */
+    .leaf {
+      position: absolute;
+      top: -14vh;
+      left: 50%;
+      width: 36px;
+      height: 36px;
+      color: #b47a2a;
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    .leaf svg { width: 100%; height: 100%; display: block; }
+
+    /* Hero leaf — front layer, larger, zig-zag path */
+    .leaf--hero {
+      width: 44px;
+      height: 44px;
+      color: #c47a1a;
+      z-index: 3;
+    }
+    #scene-lit.is-lit .leaf--hero {
+      animation: leaf-hero-fall 11s cubic-bezier(0.55, 0.05, 0.45, 0.95) 3.2s 1 forwards,
+                 leaf-hero-spin 3.6s ease-in-out 3.2s infinite;
+    }
+
+    /* Two ambient leaves — behind the wordmark, gentler paths */
+    .leaf--bg1 {
+      width: 22px;
+      height: 22px;
+      color: #7a4a12;
+      z-index: 0;
+      left: 18%;
+    }
+    #scene-lit.is-lit .leaf--bg1 {
+      animation: leaf-bg1-fall 9s linear 4.2s 1 forwards,
+                 leaf-slow-spin 5s linear 4.2s infinite;
+    }
+    .leaf--bg2 {
+      width: 18px;
+      height: 18px;
+      color: #6a3d0e;
+      z-index: 0;
+      left: 78%;
+    }
+    #scene-lit.is-lit .leaf--bg2 {
+      animation: leaf-bg2-fall 12s linear 6s 1 forwards,
+                 leaf-slow-spin 7s linear 6s infinite reverse;
+    }
+
+    /* Hero: falls in a zig-zag using X keyframes; Y is linear */
+    @keyframes leaf-hero-fall {
+      0%   { top: -14vh; transform: translateX(-30vw); opacity: 0; }
+      8%   { opacity: 0.9; }
+      25%  { transform: translateX(15vw); }
+      50%  { transform: translateX(-20vw); }
+      75%  { transform: translateX(18vw); }
+      92%  { opacity: 0.9; }
+      100% { top: 115vh; transform: translateX(-12vw); opacity: 0; }
+    }
+    @keyframes leaf-hero-spin {
+      0%   { rotate: -18deg; }
+      50%  { rotate: 22deg; }
+      100% { rotate: -18deg; }
+    }
+
+    /* Background leaves: shallower drift, mostly straight down */
+    @keyframes leaf-bg1-fall {
+      0%   { top: -14vh; transform: translateX(0); opacity: 0; }
+      12%  { opacity: 0.55; }
+      50%  { transform: translateX(6vw); }
+      100% { top: 115vh; transform: translateX(-2vw); opacity: 0; }
+    }
+    @keyframes leaf-bg2-fall {
+      0%   { top: -14vh; transform: translateX(0); opacity: 0; }
+      12%  { opacity: 0.4; }
+      50%  { transform: translateX(-8vw); }
+      100% { top: 115vh; transform: translateX(3vw); opacity: 0; }
+    }
+    @keyframes leaf-slow-spin {
+      from { rotate: 0deg; }
+      to   { rotate: 360deg; }
+    }
+
     /* Scroll cue — invites without shouting */
     .scroll-cue {
       position: absolute;
@@ -492,6 +581,7 @@
         transform: none !important;
         opacity: 1 !important;
       }
+      .leaf { display: none !important; }
     }
   </style>
 <!-- deploy: force-rebuild-1 -->
@@ -562,6 +652,27 @@
     <section id="scene-lit" class="scene" aria-hidden="true">
       <div class="lighting-base" aria-hidden="true"></div>
       <div class="lighting-rise" aria-hidden="true"></div>
+
+      <!-- Background leaves — subtle depth -->
+      <div class="leaf leaf--bg1" aria-hidden="true">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="currentColor"
+            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z M 16 2 C 14 6 12 10 12 14 M 16 2 C 18 6 20 10 20 14 M 8 12 C 12 14 14 15 16 16 M 24 12 C 20 14 18 15 16 16 M 16 16 L 16 22"
+            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <div class="leaf leaf--bg2" aria-hidden="true">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="currentColor"
+            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z"
+            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
       <div class="wordmark">
         <h1 class="wordmark-title" aria-label="RUMBO">
           <span class="letter-char">R</span>
@@ -573,6 +684,21 @@
         <span class="wordmark-line" aria-hidden="true"></span>
         <p class="wordmark-sub">Del Silencio a la Luna</p>
       </div>
+      <!-- Hero leaf — front layer, zig-zag over the wordmark -->
+      <div class="leaf leaf--hero" aria-hidden="true">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="currentColor"
+            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z"
+            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
+          />
+          <path
+            fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"
+            d="M 16 6 L 16 22 M 10 10 L 16 16 M 22 10 L 16 16 M 8 16 L 16 18 M 24 16 L 16 18"
+          />
+        </svg>
+      </div>
+
       <div class="scroll-cue" aria-hidden="true">
         <span class="scroll-cue-label">seguí</span>
         <span class="scroll-cue-line"></span>
