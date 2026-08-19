@@ -589,6 +589,65 @@
 
 <body>
   <!-- =========================================================
+       Reusable SVG symbols
+       ========================================================= -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="0" height="0"
+    style="position:absolute;overflow:hidden"
+    aria-hidden="true"
+  >
+    <defs>
+      <!--
+        Hoja de vid (Vitis vinifera) — 5 lóbulos redondeados, senos
+        profundos, peciolo largo, nervaduras principales.
+        Fill = currentColor. Nervaduras usan opacidad para dar
+        volumen sin cambiar de color.
+      -->
+      <symbol id="vid-leaf" viewBox="0 0 100 100">
+        <!-- Peciolo (tallo) -->
+        <path
+          d="M 50 92 Q 50 82 52 74"
+          stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"
+        />
+        <!-- Lámina de la hoja: 5 lóbulos con senos profundos y borde levemente ondulado -->
+        <path
+          fill="currentColor"
+          d="
+            M 52 74
+            C 48 72 44 70 40 66
+            C 34 72 26 74 20 70
+            C 18 65 22 58 28 54
+            C 22 52 16 46 14 40
+            C 18 34 24 32 30 34
+            C 28 28 30 20 36 16
+            C 42 18 46 24 48 30
+            C 50 22 54 14 62 12
+            C 68 16 70 24 68 32
+            C 74 30 82 32 86 38
+            C 84 46 78 52 72 54
+            C 78 58 82 66 78 72
+            C 72 74 64 72 58 66
+            C 56 70 54 72 52 74
+            Z"
+          stroke="currentColor" stroke-width="0.4" stroke-linejoin="round"
+        />
+        <!-- Nervaduras principales — 5 desde el peciolo -->
+        <g
+          fill="none" stroke="#0A0A0A" stroke-width="0.9"
+          stroke-linecap="round" opacity="0.28"
+        >
+          <path d="M 52 74 Q 51 60 48 40" />
+          <path d="M 52 74 Q 45 65 30 54" />
+          <path d="M 52 74 Q 58 60 62 40" />
+          <path d="M 52 74 Q 62 66 76 56" />
+          <path d="M 52 74 Q 52 68 52 60" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- =========================================================
        STAGE — Acts 1, 1.5 and 2 sit here and crossfade
        ========================================================= -->
   <div class="stage" aria-live="polite">
@@ -655,21 +714,13 @@
 
       <!-- Background leaves — subtle depth -->
       <div class="leaf leaf--bg1" aria-hidden="true">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill="currentColor"
-            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z M 16 2 C 14 6 12 10 12 14 M 16 2 C 18 6 20 10 20 14 M 8 12 C 12 14 14 15 16 16 M 24 12 C 20 14 18 15 16 16 M 16 16 L 16 22"
-            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
-          />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
         </svg>
       </div>
       <div class="leaf leaf--bg2" aria-hidden="true">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill="currentColor"
-            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z"
-            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
-          />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
         </svg>
       </div>
 
@@ -686,16 +737,8 @@
       </div>
       <!-- Hero leaf — front layer, zig-zag over the wordmark -->
       <div class="leaf leaf--hero" aria-hidden="true">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill="currentColor"
-            d="M16 2 C 22 5 26 10 27 16 C 27 20 24 23 20 24 L 20 30 L 12 30 L 12 24 C 8 23 5 20 5 16 C 6 10 10 5 16 2 Z"
-            stroke="currentColor" stroke-width="0.6" stroke-linejoin="round"
-          />
-          <path
-            fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"
-            d="M 16 6 L 16 22 M 10 10 L 16 16 M 22 10 L 16 16 M 8 16 L 16 18 M 24 16 L 16 18"
-          />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
         </svg>
       </div>
 
