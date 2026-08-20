@@ -116,13 +116,127 @@ export const CONTACT = {
   inpi: "INPI Nº 3.755.185 — Clase 41",
 };
 
+// Perfil oficial de RUMBO en Spotify — único lugar donde se define.
+export const SPOTIFY_ARTIST_URL =
+  "https://open.spotify.com/artist/4tBt8agenCfItovBi50ilq";
+
+// Carpeta pública de fotos en alta — sin /u/N/ (que ata al índice de cuenta del dueño).
+export const DRIVE_HIRES_URL =
+  "https://drive.google.com/drive/folders/1Sb5F2dBX6LI4m4wyoUG7ZWdYubbfuD5x";
+
 export const SOCIAL = {
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/rumbo_folclore",
   youtube: process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL || "https://www.youtube.com/@rumbo_folclore",
   tiktok: process.env.NEXT_PUBLIC_TIKTOK_URL || "https://www.tiktok.com/@rumbo_folclore",
-  spotify: "https://open.spotify.com/",
+  spotify: SPOTIFY_ARTIST_URL,
   linktree: "https://linktr.ee/rumbofolclore",
+  facebook: "https://www.facebook.com/profile.php?id=61585107061452",
+  whatsapp: "https://wa.me/5492612524888",
 };
+
+// ============================================================================
+// /prensa — datos de la página de prensa (EPK)
+// ============================================================================
+
+/** Ficha técnica rápida — datos duros que un programador escanea. */
+export const PRENSA_FICHA = {
+  origin: "Mendoza, Argentina",
+  // TODO — confirmar duración total del show en minutos
+  showDurationMinutes: 125,
+  // TODO — confirmar formatos disponibles (banda completa / acústico / otros)
+  formats: [] as string[],
+  riderUrl: "/rumbo-rider.pdf",
+  logoUrl: "/logo.svg",
+};
+
+/**
+ * Bios en tres largos. Todas en tercera persona, sin frases que pidan
+ * permiso por la fusión y sin épica publicitaria. Cada bloque se copia
+ * como texto plano desde /prensa.
+ */
+export const PRENSA_BIOS = {
+  oneLine:
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea.",
+  paragraph:
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino —zamba, chacarera, gato, cueca— con guitarras eléctricas, sintetizadores y producción contemporánea. El bombo legüero convive con loops y texturas electrónicas; la voz, con arreglos de banda completa. Han tocado en la Fiesta Departamental de la Vendimia de San Martín y en el Festival Nacional de la Cueca y el Damasco de Santa Rosa, donde salieron ganadores del pre-festival 2025.",
+  long:
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea. Trabaja sobre zamba, chacarera, gato y cueca; suma bombo legüero, batería, bajo y teclados, y arma arreglos donde la raíz se sostiene a la par de las texturas electrónicas.\n\nSu propuesta en vivo se articula alrededor de Del Silencio a la Luna, un concierto teatral en cinco actos que recorre una dramaturgia continua desde la oscuridad total hasta la luz plena, con puesta lumínica sincronizada y proyección HDMI. El repertorio combina reversiones —como La Luna de Áhyre o Mi mariposa triste de Hernán Figueroa Reyes— con temas propios y colaboraciones, entre ellas Zamba para no morir junto a Cristian Soloa.\n\nLa banda ha tocado en la Fiesta Departamental de la Vendimia de San Martín, en la Vía Blanca de la Vendimia de Tupungato y en los actos del 25 de Mayo en Tunuyán y Tupungato. En 2025 ganó el pre-festival de la Cueca y el Damasco de Santa Rosa y participó como banda seleccionada del Festival Nacional en 2026. Fue elegida por La Cima FM de Tupungato dentro del ciclo Sacamos las Bandas del Garaje de Cosquín Rock Radio.\n\nRUMBO se presenta con el aval del INAMU Nuevo Cuyo y marca registrada INPI Nº 3.755.185, clase 41.",
+};
+
+export type PressMention = {
+  outlet: string;
+  title: string;
+  context?: string;
+  date?: string;
+  url?: string;
+};
+
+/** Menciones de prensa. Array vacío → la sección no se renderiza. */
+export const PRENSA_MENTIONS: PressMention[] = [
+  {
+    outlet: "Cosquín Rock Radio",
+    title: "Sacamos las Bandas del Garaje",
+    context: "Seleccionados por La Cima FM de Tupungato.",
+  },
+];
+
+export type Antecedent = {
+  event: string;
+  place: string;
+  year?: string;
+};
+
+export const PRENSA_ANTECEDENTS: Antecedent[] = [
+  { event: "Fiesta Departamental de la Vendimia", place: "San Martín" },
+  { event: "Vía Blanca de la Vendimia", place: "Tupungato" },
+  { event: "25 de Mayo departamental", place: "Tunuyán y Tupungato" },
+  {
+    event: "Ganadores Pre Festival de la Cueca y el Damasco",
+    place: "Santa Rosa",
+    year: "2025",
+  },
+  {
+    event: "Festival Nacional de la Cueca y el Damasco",
+    place: "Santa Rosa",
+    year: "2026",
+  },
+];
+
+export type PressPhoto = {
+  /** Archivo en resolución pantalla (72dpi) para la grilla y descarga baja. */
+  src: string;
+  /** URL de descarga en alta (300dpi). Puede coincidir con src si no hay hi-res todavía. */
+  hiResUrl?: string;
+  photographer: string;
+  handle?: string;
+  aspect: "vertical" | "horizontal";
+  /** Marcar en b/n para que los diarios sepan que existe una versión monocromo. */
+  monochrome?: boolean;
+  alt: string;
+};
+
+/**
+ * Fotos de prensa — reusa el pool de /public/galeria/ y agrega crédito
+ * por foto. hiResUrl y aspecto son TODO por confirmar; por ahora todo
+ * apunta al mismo archivo y se asume "horizontal" (el layout tolera ambos).
+ * Créditos según mapping confirmado por RUMBO.
+ */
+export const PRENSA_PHOTOS: PressPhoto[] = [
+  { src: "/galeria/galeria-01.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 01" },
+  { src: "/galeria/galeria-02.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 02" },
+  { src: "/galeria/galeria-03.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 03" },
+  { src: "/galeria/galeria-04.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 04" },
+  { src: "/galeria/galeria-05.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 05" },
+  { src: "/galeria/galeria-06.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 06" },
+  { src: "/galeria/galeria-07.jpg", photographer: "Jorge Ariel",       handle: "@jorgearielfotografia", aspect: "horizontal", alt: "RUMBO en vivo — 07" },
+  { src: "/galeria/galeria-08.jpg", photographer: "Jorge Ariel",       handle: "@jorgearielfotografia", aspect: "horizontal", alt: "RUMBO en vivo — 08" },
+  { src: "/galeria/galeria-09.jpg", photographer: "Jeremías Vilchez", handle: "@jere.vilchez", aspect: "horizontal", alt: "RUMBO en vivo — 09" },
+  { src: "/galeria/galeria-10.jpg", photographer: "Pablo Arias", aspect: "horizontal", alt: "RUMBO en vivo — 10" },
+  { src: "/galeria/galeria-11.jpg", photographer: "Pablo Arias", aspect: "horizontal", alt: "RUMBO en vivo — 11" },
+];
+
+/** Video destacado para /prensa (EN VIVO). Hardcoded — no depende de env var. */
+export const PRENSA_VIDEO_ID = "36-X6NDK_Ms";
 
 export const NAV_LINKS = [
   { href: "#musica", label: "Música" },

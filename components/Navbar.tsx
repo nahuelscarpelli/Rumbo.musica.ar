@@ -2,10 +2,29 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { RumboMark } from "@/components/ui/RumboMark";
 import { NAV_LINKS } from "@/lib/data";
 
+/**
+ * Resolve a nav link's href relative to the current route.
+ *
+ * - On home ("/"), a "#foo" anchor stays as-is (native scroll).
+ * - Off home, "#foo" becomes "/#foo" so anchors point back to the
+ *   home page. "/prensa" and other real routes are left untouched.
+ * - The "Prensa" item becomes non-navigating when we're already
+ *   on /prensa; the caller marks it active.
+ */
+function resolveHref(hash: string, pathname: string): string {
+  if (!hash.startsWith("#")) return hash;
+  if (pathname === "/") return hash;
+  return `/${hash}`;
+}
+
 export function Navbar() {
+  const pathname = usePathname() || "/";
+  const isPrensa = pathname === "/prensa";
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -23,6 +42,8 @@ export function Navbar() {
     };
   }, [open]);
 
+  const logoHref = pathname === "/" ? "#hero" : "/";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -33,7 +54,7 @@ export function Navbar() {
     >
       <nav className="container-rumbo flex h-16 items-center justify-between md:h-20">
         <Link
-          href="#hero"
+          href={logoHref}
           aria-label="RUMBO — inicio"
           className="text-text hover:text-accent transition-colors"
         >
@@ -41,16 +62,32 @@ export function Navbar() {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="font-mono text-xs uppercase tracking-widest2 text-text/80 hover:text-accent transition-colors"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isPrensaItem = link.href === "#prensa";
+            // On /prensa: "Prensa" is active and not a link.
+            if (isPrensaItem && isPrensa) {
+              return (
+                <li key={link.href}>
+                  <span
+                    aria-current="page"
+                    className="font-mono text-xs uppercase tracking-widest2 text-accent"
+                  >
+                    {link.label}
+                  </span>
+                </li>
+              );
+            }
+            return (
+              <li key={link.href}>
+                <Link
+                  href={resolveHref(link.href, pathname)}
+                  className="font-mono text-xs uppercase tracking-widest2 text-text/80 hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <button
@@ -86,17 +123,32 @@ export function Navbar() {
         }`}
       >
         <ul className="container-rumbo flex flex-col gap-1 pb-8 pt-4">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block border-b border-border py-4 font-display text-2xl uppercase tracking-wider2 text-text hover:text-accent transition-colors"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isPrensaItem = link.href === "#prensa";
+            if (isPrensaItem && isPrensa) {
+              return (
+                <li key={link.href}>
+                  <span
+                    aria-current="page"
+                    className="block border-b border-border py-4 font-display text-2xl uppercase tracking-wider2 text-accent"
+                  >
+                    {link.label}
+                  </span>
+                </li>
+              );
+            }
+            return (
+              <li key={link.href}>
+                <Link
+                  href={resolveHref(link.href, pathname)}
+                  onClick={() => setOpen(false)}
+                  className="block border-b border-border py-4 font-display text-2xl uppercase tracking-wider2 text-text hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </header>
