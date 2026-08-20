@@ -95,48 +95,40 @@ export default function PrensaPage() {
             <h2 id="prensa-escuchar" className="eyebrow flex items-center gap-3 before:block before:h-px before:w-8 before:bg-accent">
               02 · Escuchar
             </h2>
-            <ul className="grid gap-4 md:grid-cols-2">
+            <ul className="grid gap-2 md:grid-cols-2">
               {RELEASES.map((release) => {
                 const embed = spotifyEmbedSrc(release);
                 return (
-                  <li key={release.title} className="border border-border bg-surface/40 p-4">
-                    <p className="font-display text-xl uppercase tracking-wider2">
-                      {release.title}
-                    </p>
-                    <p className="mb-3 text-xs text-text/60">{release.description}</p>
-                    {embed && (
-                      <iframe
-                        src={embed}
-                        title={`${release.title} en Spotify`}
-                        width="100%"
-                        height={release.spotifyAlbumId ? 232 : 152}
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"
-                        className="block w-full border border-border"
-                      />
-                    )}
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {release.spotifyUrl && (
-                        <a
-                          href={release.spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 hover:border-accent hover:text-accent"
-                        >
-                          Spotify
-                        </a>
-                      )}
+                  <li key={release.title} className="flex flex-col gap-2 border border-border bg-surface/40 p-3">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="truncate font-display text-base uppercase tracking-wider2">
+                          {release.title}
+                        </p>
+                        <p className="truncate text-[11px] text-text/50">{release.description}</p>
+                      </div>
                       {release.youtubeUrl && (
                         <a
                           href={release.youtubeUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 hover:border-accent hover:text-accent"
+                          className="shrink-0 font-mono text-[9px] uppercase tracking-widest2 text-text/60 hover:text-accent"
                         >
-                          YouTube
+                          YouTube ↗
                         </a>
                       )}
                     </div>
+                    {embed && (
+                      <iframe
+                        src={embed}
+                        title={`${release.title} en Spotify`}
+                        width="100%"
+                        height={release.spotifyAlbumId ? 152 : 80}
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="block w-full"
+                      />
+                    )}
                   </li>
                 );
               })}
@@ -377,15 +369,22 @@ export default function PrensaPage() {
                   ) y <span className="text-text/80">Pablo Arias</span>.
                 </div>
 
-                <div className="text-xs text-muted print:hidden">
-                  Carpeta completa en Drive:{" "}
+                <div className="print:hidden">
                   <a
                     href={DRIVE_HIRES_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent-2 underline-offset-4 hover:underline"
+                    className="inline-flex items-center gap-2 border border-border px-4 py-2 font-mono text-xs uppercase tracking-widest2 text-text/80 hover:border-accent hover:text-accent transition-colors"
                   >
-                    {DRIVE_HIRES_URL}
+                    <svg
+                      aria-hidden
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 shrink-0 fill-current"
+                    >
+                      <path d="M6.26 3l6.53 11.31h9.21L15.47 3H6.26zm-1.72.98L1 15.98 4.55 22l3.55-6.02L4.54 3.98zM9.29 22h9.24L22 15.98H12.85L9.29 22z" />
+                    </svg>
+                    Ver carpeta completa en Drive
+                    <span aria-hidden className="text-muted">↗</span>
                   </a>
                 </div>
               </>
