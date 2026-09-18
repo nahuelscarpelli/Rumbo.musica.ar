@@ -143,6 +143,52 @@
   text-wrap: balance;
 }
 
+/* =============================================================================
+   Print dossier — hoja limpia sobre fondo claro. Se dispara al hacer
+   window.print() desde /prensa. Oculta nav, botones, embeds, WhatsApp
+   flotante y todo lo que no sea texto/foto útil para un PDF adjunto.
+   ============================================================================ */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #0A0A0A !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body::after { display: none !important; }
+
+  /* Hide chrome and interactive stuff */
+  header, nav, footer,
+  .print-hide,
+  .print\:hidden,
+  iframe,
+  video,
+  button,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  /* Boost readability on white */
+  a { color: #0A0A0A !important; text-decoration: underline; }
+  .text-muted, .text-text\/70, .text-text\/80, .text-text\/85, .text-text\/60 {
+    color: #333 !important;
+  }
+  .bg-surface, .bg-surface\/40, .bg-bg { background: transparent !important; }
+  .border-border { border-color: #999 !important; }
+
+  /* Force sensible section breaks */
+  section, article { break-inside: avoid; page-break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; color: #0A0A0A !important; }
+
+  /* Grain removed above; make sure images stay printable */
+  img { max-width: 100%; break-inside: avoid; }
+}
+
 /* Stem player — range input (fader) */
 .stem-fader {
   -webkit-appearance: none;

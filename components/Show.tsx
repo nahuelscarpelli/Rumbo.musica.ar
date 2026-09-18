@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ACTS, UPCOMING_DATES } from "@/lib/data";
+import { ACTS, SHOW_RECAP_VIDEO_ID, UPCOMING_DATES } from "@/lib/data";
 
 export function Show() {
   const featured = UPCOMING_DATES.find((d) => d.featured) ?? UPCOMING_DATES[0];
@@ -155,18 +155,51 @@ export function Show() {
           </ol>
         </div>
 
+        {/* Recap video — placeholder until SHOW_RECAP_VIDEO_ID is set */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="mt-20"
+        >
+          <p className="eyebrow flex items-center gap-3 before:block before:h-px before:w-8 before:bg-accent-2">
+            Resumen
+          </p>
+          <div className="mt-4 aspect-video w-full overflow-hidden border border-border bg-black/60">
+            {SHOW_RECAP_VIDEO_ID ? (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${SHOW_RECAP_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="Del Silencio a la Luna — resumen del show"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                className="h-full w-full"
+              />
+            ) : (
+              <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-8 text-center">
+                <span className="font-mono text-[10px] uppercase tracking-widest2 text-accent-2">
+                  Próximamente
+                </span>
+                <p className="font-display text-xl uppercase tracking-wider2 text-text/80 md:text-2xl">
+                  Video resumen del show
+                </p>
+                <p className="text-xs text-text/50">
+                  Nave Cultural · Mendoza
+                </p>
+              </div>
+            )}
+          </div>
+        </motion.div>
+
         <div className="mt-16 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          {ticketUrl ? (
+          {ticketUrl && (
             <a
               href={ticketUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
             >
-              Quiero mi entrada
-            </a>
-          ) : (
-            <a href="#fechas" className="btn-primary">
               Quiero mi entrada
             </a>
           )}

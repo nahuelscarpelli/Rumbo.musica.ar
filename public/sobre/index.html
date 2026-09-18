@@ -17,8 +17,6 @@
     @font-face rule pointing to it. Keep --font-body untouched.
   -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap" rel="stylesheet" />
-  <!-- Preload the hero image so Act 1.5 doesn't flash -->
-  <link rel="preload" as="image" href="valles.png" />
 
   <style>
     /* =====================================================================
@@ -178,43 +176,6 @@
     }
 
     /* =====================================================================
-       Act 1.5 — Valles image (Ken Burns + slow reveal + fade to warm)
-       ================================================================== */
-    #scene-image {
-      padding: 0;
-      overflow: hidden;
-    }
-    .image-wrap {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-    .valles-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1.08) translate(0, 0);
-      transition: transform 6s linear;
-      will-change: transform;
-    }
-    /* Ken Burns — slow drift + zoom in while it's on screen */
-    #scene-image.is-visible .valles-image {
-      transform: scale(1.16) translate(-1.5%, 1.5%);
-    }
-    /* Warm vignette that grows slightly toward the end to bridge into Act 2 */
-    .image-vignette {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(10, 10, 10, 0.55) 85%, rgba(10, 10, 10, 0.9) 100%),
-        linear-gradient(to bottom, rgba(10, 10, 10, 0.25) 0%, transparent 30%, transparent 70%, rgba(10, 10, 10, 0.6) 100%);
-    }
-
-    /* =====================================================================
        Act 2 — Sunrise + wordmark reveal
        ================================================================== */
     #scene-lit {
@@ -338,6 +299,95 @@
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
+    }
+
+    /* =====================================================================
+       Falling leaves (Mendoza vid) — layered inside Act 2
+       One "hero" leaf zig-zags in front of the wordmark; two background
+       leaves drift past at lower opacity to give depth. All hidden by
+       default; the scene reveals them once .is-lit fires.
+       ================================================================== */
+    .leaf {
+      position: absolute;
+      top: -14vh;
+      left: 50%;
+      width: 36px;
+      height: 36px;
+      color: #b47a2a;
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    .leaf svg { width: 100%; height: 100%; display: block; }
+
+    /* Hero leaf — front layer, larger, zig-zag path */
+    .leaf--hero {
+      width: 44px;
+      height: 44px;
+      color: #c47a1a;
+      z-index: 3;
+    }
+    #scene-lit.is-lit .leaf--hero {
+      animation: leaf-hero-fall 11s cubic-bezier(0.55, 0.05, 0.45, 0.95) 3.2s 1 forwards,
+                 leaf-hero-spin 3.6s ease-in-out 3.2s infinite;
+    }
+
+    /* Two ambient leaves — behind the wordmark, gentler paths */
+    .leaf--bg1 {
+      width: 22px;
+      height: 22px;
+      color: #7a4a12;
+      z-index: 0;
+      left: 18%;
+    }
+    #scene-lit.is-lit .leaf--bg1 {
+      animation: leaf-bg1-fall 9s linear 4.2s 1 forwards,
+                 leaf-slow-spin 5s linear 4.2s infinite;
+    }
+    .leaf--bg2 {
+      width: 18px;
+      height: 18px;
+      color: #6a3d0e;
+      z-index: 0;
+      left: 78%;
+    }
+    #scene-lit.is-lit .leaf--bg2 {
+      animation: leaf-bg2-fall 12s linear 6s 1 forwards,
+                 leaf-slow-spin 7s linear 6s infinite reverse;
+    }
+
+    /* Hero: falls in a zig-zag using X keyframes; Y is linear */
+    @keyframes leaf-hero-fall {
+      0%   { top: -14vh; transform: translateX(-30vw); opacity: 0; }
+      8%   { opacity: 0.9; }
+      25%  { transform: translateX(15vw); }
+      50%  { transform: translateX(-20vw); }
+      75%  { transform: translateX(18vw); }
+      92%  { opacity: 0.9; }
+      100% { top: 115vh; transform: translateX(-12vw); opacity: 0; }
+    }
+    @keyframes leaf-hero-spin {
+      0%   { rotate: -18deg; }
+      50%  { rotate: 22deg; }
+      100% { rotate: -18deg; }
+    }
+
+    /* Background leaves: shallower drift, mostly straight down */
+    @keyframes leaf-bg1-fall {
+      0%   { top: -14vh; transform: translateX(0); opacity: 0; }
+      12%  { opacity: 0.55; }
+      50%  { transform: translateX(6vw); }
+      100% { top: 115vh; transform: translateX(-2vw); opacity: 0; }
+    }
+    @keyframes leaf-bg2-fall {
+      0%   { top: -14vh; transform: translateX(0); opacity: 0; }
+      12%  { opacity: 0.4; }
+      50%  { transform: translateX(-8vw); }
+      100% { top: 115vh; transform: translateX(3vw); opacity: 0; }
+    }
+    @keyframes leaf-slow-spin {
+      from { rotate: 0deg; }
+      to   { rotate: 360deg; }
     }
 
     /* Scroll cue — invites without shouting */
@@ -520,7 +570,7 @@
        Reduced motion — skip choreography, land on Act 3 with the warm bg
        ================================================================== */
     @media (prefers-reduced-motion: reduce) {
-      .scene, .valles-image,
+      .scene,
       .lighting-base, .lighting-rise,
       .wordmark-title .letter-char, .wordmark-line, .wordmark-sub,
       .scroll-cue-line, .envelope,
@@ -531,11 +581,72 @@
         transform: none !important;
         opacity: 1 !important;
       }
+      .leaf { display: none !important; }
     }
   </style>
+<!-- deploy: force-rebuild-1 -->
 </head>
 
 <body>
+  <!-- =========================================================
+       Reusable SVG symbols
+       ========================================================= -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="0" height="0"
+    style="position:absolute;overflow:hidden"
+    aria-hidden="true"
+  >
+    <defs>
+      <!--
+        Hoja de vid (Vitis vinifera) — 5 lóbulos redondeados, senos
+        profundos, peciolo largo, nervaduras principales.
+        Fill = currentColor. Nervaduras usan opacidad para dar
+        volumen sin cambiar de color.
+      -->
+      <symbol id="vid-leaf" viewBox="0 0 100 100">
+        <!-- Peciolo (tallo) -->
+        <path
+          d="M 50 92 Q 50 82 52 74"
+          stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"
+        />
+        <!-- Lámina de la hoja: 5 lóbulos con senos profundos y borde levemente ondulado -->
+        <path
+          fill="currentColor"
+          d="
+            M 52 74
+            C 48 72 44 70 40 66
+            C 34 72 26 74 20 70
+            C 18 65 22 58 28 54
+            C 22 52 16 46 14 40
+            C 18 34 24 32 30 34
+            C 28 28 30 20 36 16
+            C 42 18 46 24 48 30
+            C 50 22 54 14 62 12
+            C 68 16 70 24 68 32
+            C 74 30 82 32 86 38
+            C 84 46 78 52 72 54
+            C 78 58 82 66 78 72
+            C 72 74 64 72 58 66
+            C 56 70 54 72 52 74
+            Z"
+          stroke="currentColor" stroke-width="0.4" stroke-linejoin="round"
+        />
+        <!-- Nervaduras principales — 5 desde el peciolo -->
+        <g
+          fill="none" stroke="#0A0A0A" stroke-width="0.9"
+          stroke-linecap="round" opacity="0.28"
+        >
+          <path d="M 52 74 Q 51 60 48 40" />
+          <path d="M 52 74 Q 45 65 30 54" />
+          <path d="M 52 74 Q 58 60 62 40" />
+          <path d="M 52 74 Q 62 66 76 56" />
+          <path d="M 52 74 Q 52 68 52 60" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- =========================================================
        STAGE — Acts 1, 1.5 and 2 sit here and crossfade
        ========================================================= -->
@@ -596,24 +707,23 @@
       <p class="hint">abrí el sobre</p>
     </section>
 
-    <!-- ACT 1.5 — Full-screen valles image with Ken Burns + vignette -->
-    <section id="scene-image" class="scene" aria-hidden="true">
-      <div class="image-wrap">
-        <img
-          src="valles.png"
-          alt=""
-          class="valles-image"
-          loading="eager"
-          decoding="async"
-        />
-        <div class="image-vignette" aria-hidden="true"></div>
-      </div>
-    </section>
-
     <!-- ACT 2 — Sunrise + wordmark reveal -->
     <section id="scene-lit" class="scene" aria-hidden="true">
       <div class="lighting-base" aria-hidden="true"></div>
       <div class="lighting-rise" aria-hidden="true"></div>
+
+      <!-- Background leaves — subtle depth -->
+      <div class="leaf leaf--bg1" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
+        </svg>
+      </div>
+      <div class="leaf leaf--bg2" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
+        </svg>
+      </div>
+
       <div class="wordmark">
         <h1 class="wordmark-title" aria-label="RUMBO">
           <span class="letter-char">R</span>
@@ -625,6 +735,13 @@
         <span class="wordmark-line" aria-hidden="true"></span>
         <p class="wordmark-sub">Del Silencio a la Luna</p>
       </div>
+      <!-- Hero leaf — front layer, zig-zag over the wordmark -->
+      <div class="leaf leaf--hero" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="#vid-leaf" />
+        </svg>
+      </div>
+
       <div class="scroll-cue" aria-hidden="true">
         <span class="scroll-cue-label">seguí</span>
         <span class="scroll-cue-line"></span>
@@ -704,7 +821,6 @@
 
     // Timings (ms)
     const FLAP_MS = 900;          // envelope flap opens
-    const IMAGE_HOLD_MS = 4000;   // Ken Burns hold
     const LIGHTING_MS = 8000;     // sunrise duration
     const WORDMARK_TAIL_MS = 2500; // extra beat after light finishes
 
@@ -721,7 +837,6 @@
     // Elements
     // ------------------------------------------------------------------
     const sceneEnvelope = document.getElementById("scene-envelope");
-    const sceneImage = document.getElementById("scene-image");
     const sceneLit = document.getElementById("scene-lit");
     const act3 = document.getElementById("act-3");
     const envelope = document.querySelector(".envelope");
@@ -737,25 +852,17 @@
     }
 
     // ------------------------------------------------------------------
-    // Sequence — Act 1 → 1.5 → 2 → 3
+    // Sequence — Act 1 → 2 → 3
     // ------------------------------------------------------------------
     function openEnvelope() {
       if (envelope.classList.contains("is-open")) return;
       envelope.classList.add("is-open");
-      setTimeout(showImage, FLAP_MS);
-    }
-
-    function showImage() {
-      // Crossfade: envelope out, image in (both at once, no black gap)
-      sceneEnvelope.classList.remove("is-visible");
-      sceneImage.classList.add("is-visible");
-      sceneImage.setAttribute("aria-hidden", "false");
-      setTimeout(startSunrise, IMAGE_HOLD_MS);
+      setTimeout(startSunrise, FLAP_MS);
     }
 
     function startSunrise() {
-      // Crossfade image → dark stage, then light rises
-      sceneImage.classList.remove("is-visible");
+      // Crossfade envelope → dark stage, then light rises
+      sceneEnvelope.classList.remove("is-visible");
       sceneLit.classList.add("is-visible");
       sceneLit.setAttribute("aria-hidden", "false");
 
