@@ -84,17 +84,14 @@ export const ACTS: Act[] = [
   { number: "V", title: "La Luna", tagline: "La plenitud" },
 ];
 
-export const UPCOMING_DATES: ShowDate[] = [
-  {
-    date: "JUE 10 SEP 2026",
-    time: "20:30 hs",
-    event: "Del Silencio a la Luna",
-    location: "Nave Cultural, Mendoza",
-    upcoming: true,
-    featured: true,
-    ticketUrl: "https://www.entradaweb.com.ar/evento/4a801dbb/step/1",
-  },
-];
+export const UPCOMING_DATES: ShowDate[] = [];
+
+/**
+ * ID de YouTube del video resumen del show "Del Silencio a la Luna".
+ * null → la sección muestra un placeholder "Próximamente".
+ * Al llegar el video, reemplazar por el ID (ej. "36-X6NDK_Ms").
+ */
+export const SHOW_RECAP_VIDEO_ID: string | null = null;
 
 export const SOUND_TAGS = [
   "Zamba",
