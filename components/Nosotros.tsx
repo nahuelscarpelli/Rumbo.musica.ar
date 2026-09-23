@@ -74,6 +74,12 @@ export function Nosotros() {
               </div>
             </motion.li>
           ))}
+          {MEMBERS.length % 3 !== 0 && (
+            <li aria-hidden className="hidden bg-bg lg:block" />
+          )}
+          {MEMBERS.length % 2 !== 0 && (
+            <li aria-hidden className="hidden bg-bg sm:block lg:hidden" />
+          )}
         </ul>
 
         {/* Sound identity */}
