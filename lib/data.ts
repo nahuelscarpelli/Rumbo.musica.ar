@@ -37,7 +37,6 @@ export const MEMBERS: Member[] = [
   { name: "Richard Toro", role: "Guitarra y Dirección", initials: "RT", image: "/integrantes/richard.jpeg" },
   { name: "Nahuel Scarpelli", role: "Guitarra y Producción", initials: "NS", image: "/integrantes/nahuel.jpeg" },
   { name: "Matías Ríos", role: "Piano y Sintetizadores", initials: "MR", image: "/integrantes/maty.jpeg" },
-  { name: "Samuel Franco", role: "Bajo", initials: "SF", image: "/integrantes/samu.jpeg" },
   { name: "Absalón \"Chino\" Dhuin", role: "Batería y Producción", initials: "AD", image: "/integrantes/chino.jpeg" },
 ];
 
