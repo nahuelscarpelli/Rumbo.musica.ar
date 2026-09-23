@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ACTS, SHOW_RECAP_VIDEO_ID, UPCOMING_DATES } from "@/lib/data";
+import { ACTS, SHOW_VIDEOS, UPCOMING_DATES } from "@/lib/data";
 
 export function Show() {
   const featured = UPCOMING_DATES.find((d) => d.featured) ?? UPCOMING_DATES[0];
@@ -155,7 +155,7 @@ export function Show() {
           </ol>
         </div>
 
-        {/* Recap video — placeholder until SHOW_RECAP_VIDEO_ID is set */}
+        {/* Recap — 2 videos side by side (backstage + show) */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -166,29 +166,17 @@ export function Show() {
           <p className="eyebrow flex items-center gap-3 before:block before:h-px before:w-8 before:bg-accent-2">
             Resumen
           </p>
-          <div className="mt-4 aspect-video w-full overflow-hidden border border-border bg-black/60">
-            {SHOW_RECAP_VIDEO_ID ? (
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${SHOW_RECAP_VIDEO_ID}?rel=0&modestbranding=1`}
-                title="Del Silencio a la Luna — resumen del show"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                className="h-full w-full"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-8 text-center">
-                <span className="font-mono text-[10px] uppercase tracking-widest2 text-accent-2">
-                  Próximamente
-                </span>
-                <p className="font-display text-xl uppercase tracking-wider2 text-text/80 md:text-2xl">
-                  Video resumen del show
-                </p>
-                <p className="text-xs text-text/50">
-                  Nave Cultural · Mendoza
-                </p>
-              </div>
-            )}
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <ShowVideoCard
+              label="Backstage"
+              title="Del Silencio a la Luna — backstage"
+              videoId={SHOW_VIDEOS.backstage}
+            />
+            <ShowVideoCard
+              label="El show"
+              title="Del Silencio a la Luna — resumen del show"
+              videoId={SHOW_VIDEOS.recap}
+            />
           </div>
         </motion.div>
 
@@ -209,5 +197,49 @@ export function Show() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Video card for the "Resumen" grid. Renders a YouTube embed when videoId
+ * is set, otherwise a "Próximamente" placeholder with the same aspect ratio
+ * so the layout doesn't shift when the video lands.
+ */
+function ShowVideoCard({
+  label,
+  title,
+  videoId,
+}: {
+  label: string;
+  title: string;
+  videoId: string | null;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-[10px] uppercase tracking-widest2 text-accent-2">
+        {label}
+      </span>
+      <div className="aspect-video w-full overflow-hidden border border-border bg-black/60">
+        {videoId ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+            className="h-full w-full"
+          />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-6 text-center">
+            <span className="font-mono text-[10px] uppercase tracking-widest2 text-accent-2">
+              Próximamente
+            </span>
+            <p className="font-display text-lg uppercase tracking-wider2 text-text/80">
+              {title.split("—")[1]?.trim() ?? title}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

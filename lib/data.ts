@@ -86,11 +86,14 @@ export const ACTS: Act[] = [
 export const UPCOMING_DATES: ShowDate[] = [];
 
 /**
- * ID de YouTube del video resumen del show "Del Silencio a la Luna".
- * null → la sección muestra un placeholder "Próximamente".
- * Al llegar el video, reemplazar por el ID (ej. "36-X6NDK_Ms").
+ * Videos del bloque "Resumen" en la sección Show.
+ * - backstage: video del detrás de escena.
+ * - recap: resumen del show en vivo. null → placeholder "Próximamente".
  */
-export const SHOW_RECAP_VIDEO_ID: string | null = null;
+export const SHOW_VIDEOS = {
+  backstage: "BLW_kJs3qMM" as string | null,
+  recap: null as string | null,
+};
 
 export const SOUND_TAGS = [
   "Zamba",
