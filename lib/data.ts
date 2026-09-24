@@ -107,8 +107,6 @@ export const SOUND_TAGS = [
 ];
 
 export const CONTACT = {
-  phone: "(261) 252-4888",
-  phoneLink: "+5492612524888",
   email: "rumbofolclore@gmail.com",
   instagramHandle: "@rumbo_folclore",
   city: "Mendoza, Argentina",
@@ -138,7 +136,7 @@ export const SOCIAL = {
   spotify: SPOTIFY_ARTIST_URL,
   linktree: "https://linktr.ee/rumbofolclore",
   facebook: "https://www.facebook.com/profile.php?id=61585107061452",
-  whatsapp: "https://wa.me/5492612524888",
+  whatsapp: "https://wa.me/5492612099010",
 };
 
 // ============================================================================

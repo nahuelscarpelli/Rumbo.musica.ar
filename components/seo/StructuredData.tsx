@@ -48,7 +48,7 @@ export function MusicGroupSchema() {
       SOCIAL.linktree,
     ].filter(Boolean),
     email: "rumbofolclore@gmail.com",
-    telephone: "+5492612524888",
+    telephone: MANAGER.phoneLink,
     contactPoint: [
       {
         "@type": "ContactPoint",

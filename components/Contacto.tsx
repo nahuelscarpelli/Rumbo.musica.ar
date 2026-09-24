@@ -130,15 +130,6 @@ export function Contacto() {
               <ul className="mt-4 flex flex-col gap-3">
                 <li>
                   <a
-                    href={`tel:${CONTACT.phoneLink}`}
-                    className="group flex items-center gap-3 text-text hover:text-accent transition-colors"
-                  >
-                    <span aria-hidden className="text-accent group-hover:text-text-balance">📞</span>
-                    <span className="font-mono">{CONTACT.phone}</span>
-                  </a>
-                </li>
-                <li>
-                  <a
                     href={`mailto:${CONTACT.email}`}
                     className="group flex items-center gap-3 text-text hover:text-accent transition-colors"
                   >

@@ -486,17 +486,6 @@ export default function PrensaPage() {
                 </a>
               </li>
               <li>
-                <p className="eyebrow">WhatsApp</p>
-                <a
-                  href={SOCIAL.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 block font-display text-xl uppercase tracking-wider2 hover:text-accent"
-                >
-                  {CONTACT.phone}
-                </a>
-              </li>
-              <li>
                 <p className="eyebrow">Instagram</p>
                 <a
                   href={SOCIAL.instagram}
