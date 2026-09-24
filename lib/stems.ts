@@ -10,7 +10,7 @@ export type StemMeta = {
 };
 
 export const STEMS: StemMeta[] = [
-  { name: "drums", label: "Batería", symbol: "BAT", color: "#c0392b" },
+  { name: "drums", label: "Batería", symbol: "BAT", color: "#9c4a2c" },
   { name: "bass", label: "Bajo", symbol: "BJO", color: "#2980b9" },
   { name: "guitars", label: "Guitarras", symbol: "GTR", color: "#e67e22" },
   { name: "vocals", label: "Voz", symbol: "VOZ", color: "#e8d5b7" },

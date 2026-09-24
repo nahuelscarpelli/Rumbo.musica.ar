@@ -170,7 +170,7 @@ Los enlaces de descarga ya apuntan ahí.
 
 ## Diseño
 
-- Paleta oscura (`#0a0a0a` base) con acento rojo/óxido (`#c0392b`) y crema cálido (`#e8d5b7`).
+- Paleta oscura (`#0a0a0a` base) con acento óxido/rust (`#9c4a2c`) y crema cálido (`#e8d5b7`).
 - Tipografías: **Bebas Neue** (display) + **DM Mono** (cuerpo y técnico).
 - Grain overlay SVG inline aplicado sobre todo el `<body>`.
 - Animaciones con `prefers-reduced-motion` respetado.

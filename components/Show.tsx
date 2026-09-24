@@ -23,7 +23,7 @@ export function Show() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 80% 10%, rgba(232,213,183,0.08) 0%, transparent 40%), radial-gradient(circle at 15% 90%, rgba(192,57,43,0.10) 0%, transparent 45%)",
+            "radial-gradient(circle at 80% 10%, rgba(232,213,183,0.08) 0%, transparent 40%), radial-gradient(circle at 15% 90%, rgba(156,74,44,0.10) 0%, transparent 45%)",
         }}
       />
 

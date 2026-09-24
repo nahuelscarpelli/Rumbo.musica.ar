@@ -33,7 +33,7 @@ export function Hero() {
           className="absolute inset-0 opacity-50"
           style={{
             background:
-              "radial-gradient(circle at 70% 20%, rgba(192,57,43,0.18) 0%, transparent 45%), radial-gradient(circle at 20% 80%, rgba(232,213,183,0.06) 0%, transparent 50%)",
+              "radial-gradient(circle at 70% 20%, rgba(156,74,44,0.18) 0%, transparent 45%), radial-gradient(circle at 20% 80%, rgba(232,213,183,0.06) 0%, transparent 50%)",
           }}
         />
         {/* Vignette bottom — fades into the next section */}

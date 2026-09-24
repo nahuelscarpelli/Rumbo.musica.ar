@@ -72,7 +72,7 @@ export function StemPlayer() {
         aria-hidden
         className="absolute inset-0 -z-10 transition-[opacity,background] duration-1000"
         style={{
-          background: `radial-gradient(circle at 50% 30%, rgba(192,57,43,${
+          background: `radial-gradient(circle at 50% 30%, rgba(156,74,44,${
             0.04 + intensity * 0.12
           }) 0%, transparent 55%), radial-gradient(circle at 50% 70%, rgba(41,128,185,${
             0.05 + intensity * 0.1

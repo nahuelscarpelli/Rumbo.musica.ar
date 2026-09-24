@@ -25,7 +25,7 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Contactar a RUMBO por WhatsApp — ${MANAGER.name} (${MANAGER.role})`}
-      className={`fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-text shadow-[0_8px_24px_rgba(0,0,0,0.5)] ring-1 ring-accent/40 transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-[0_12px_32px_rgba(192,57,43,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-2 ${
+      className={`fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-text shadow-[0_8px_24px_rgba(0,0,0,0.5)] ring-1 ring-accent/40 transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-[0_12px_32px_rgba(156,74,44,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-2 ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
