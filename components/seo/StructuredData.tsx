@@ -1,4 +1,4 @@
-import { MEMBERS, SOCIAL } from "@/lib/data";
+import { MANAGER, MEMBERS, SOCIAL } from "@/lib/data";
 
 /**
  * Schema.org MusicGroup structured data.
@@ -49,6 +49,16 @@ export function MusicGroupSchema() {
     ].filter(Boolean),
     email: "rumbofolclore@gmail.com",
     telephone: "+5492612524888",
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "booking",
+        name: MANAGER.name,
+        telephone: MANAGER.phoneLink,
+        areaServed: "AR",
+        availableLanguage: ["es"],
+      },
+    ],
   };
 
   return (

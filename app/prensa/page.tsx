@@ -9,6 +9,7 @@ import { WhatsappFab } from "@/components/prensa/WhatsappFab";
 import {
   CONTACT,
   DRIVE_HIRES_URL,
+  MANAGER,
   MEMBERS,
   PRENSA_ANTECEDENTS,
   PRENSA_BIOS,
@@ -441,6 +442,39 @@ export default function PrensaPage() {
             <h2 id="prensa-contacto" className="eyebrow flex items-center gap-3 before:block before:h-px before:w-8 before:bg-accent">
               09 · Contacto
             </h2>
+
+            <div className="border border-accent bg-surface/60 p-6 md:p-8">
+              <p className="font-mono text-[10px] uppercase tracking-widest2 text-accent">
+                Booking · Prensa · Management
+              </p>
+              <p className="mt-2 font-display text-3xl uppercase tracking-wider2 md:text-4xl">
+                {MANAGER.name}
+              </p>
+              <p className="font-mono text-[10px] uppercase tracking-widest2 text-muted">
+                {MANAGER.role}
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+                <li>
+                  <a
+                    href={MANAGER.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-display text-xl uppercase tracking-wider2 hover:text-accent"
+                  >
+                    WhatsApp · {MANAGER.phone}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`tel:${MANAGER.phoneLink}`}
+                    className="font-display text-xl uppercase tracking-wider2 hover:text-accent"
+                  >
+                    Tel · {MANAGER.phone}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
             <ul className="grid gap-4 md:grid-cols-2">
               <li>
                 <p className="eyebrow">Mail</p>

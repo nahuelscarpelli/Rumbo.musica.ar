@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { CONTACT, SOCIAL } from "@/lib/data";
+import { CONTACT, MANAGER, SOCIAL } from "@/lib/data";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -176,8 +176,35 @@ export function Contacto() {
             <div className="divider-diag" />
 
             <div>
-              <p className="eyebrow">Gestión</p>
-              <p className="mt-3 font-mono text-sm text-text/80">{CONTACT.email}</p>
+              <p className="eyebrow">Management</p>
+              <p className="mt-3 font-display text-xl uppercase tracking-wider2">
+                {MANAGER.name}
+              </p>
+              <p className="font-mono text-[10px] uppercase tracking-widest2 text-muted">
+                {MANAGER.role}
+              </p>
+              <ul className="mt-3 flex flex-col gap-2">
+                <li>
+                  <a
+                    href={MANAGER.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3 text-text hover:text-accent transition-colors"
+                  >
+                    <span aria-hidden className="text-accent">✆</span>
+                    <span className="font-mono">WhatsApp · {MANAGER.phone}</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`tel:${MANAGER.phoneLink}`}
+                    className="group flex items-center gap-3 text-text hover:text-accent transition-colors"
+                  >
+                    <span aria-hidden className="text-accent">📞</span>
+                    <span className="font-mono">{MANAGER.phone}</span>
+                  </a>
+                </li>
+              </ul>
             </div>
           </motion.aside>
         </div>

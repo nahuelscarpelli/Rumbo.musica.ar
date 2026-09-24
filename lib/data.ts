@@ -115,6 +115,14 @@ export const CONTACT = {
   inpi: "INPI Nº 3.755.185 — Clase 41",
 };
 
+export const MANAGER = {
+  name: "Cristian Back",
+  role: "Manager",
+  phone: "(261) 209-9010",
+  phoneLink: "+5492612099010",
+  whatsapp: "https://wa.me/5492612099010",
+};
+
 // Perfil oficial de RUMBO en Spotify — único lugar donde se define.
 export const SPOTIFY_ARTIST_URL =
   "https://open.spotify.com/artist/4tBt8agenCfItovBi50ilq";
