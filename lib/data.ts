@@ -118,7 +118,8 @@ export const MANAGER = {
   role: "Manager",
   phone: "(261) 209-9010",
   phoneLink: "+5492612099010",
-  whatsapp: "https://wa.me/5492612099010",
+  whatsapp:
+    "https://wa.me/5492612099010?text=Hola+Cristian%2C+queremos+contratar+a+Rumbo.",
 };
 
 // Perfil oficial de RUMBO en Spotify — único lugar donde se define.
@@ -136,7 +137,7 @@ export const SOCIAL = {
   spotify: SPOTIFY_ARTIST_URL,
   linktree: "https://linktr.ee/rumbofolclore",
   facebook: "https://www.facebook.com/profile.php?id=61585107061452",
-  whatsapp: "https://wa.me/5492612099010",
+  whatsapp: MANAGER.whatsapp,
 };
 
 // ============================================================================
