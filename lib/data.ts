@@ -47,13 +47,19 @@ export const MEMBERS: Member[] = [
 export const RELEASES: Release[] = [
   {
     title: "Valles",
-    description: "Primer videoclip oficial — canción propia",
+    description: "Primer videoclip oficial",
     spotifyTrackId: "5GYmtjCMbtfD9u0lAdl4zj",
     spotifyUrl: "https://open.spotify.com/intl-es/track/5GYmtjCMbtfD9u0lAdl4zj",
     youtubeId: "6zgk9lYJwXg",
     youtubeUrl: "https://youtu.be/6zgk9lYJwXg",
     featured: true,
     videoclip: true,
+  },
+  {
+    title: "Vuela",
+    description: "Canción propia",
+    spotifyTrackId: "0pY3aLiM3a5kequICeK6nr",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/0pY3aLiM3a5kequICeK6nr",
   },
   {
     title: "La Luna",
@@ -70,14 +76,6 @@ export const RELEASES: Release[] = [
     spotifyUrl: "https://open.spotify.com/intl-es/track/5yaqWWAyYg6IZijGEuWs5Y",
     youtubeId: "Flicqztzb1k",
     youtubeUrl: "https://www.youtube.com/watch?v=Flicqztzb1k",
-  },
-  {
-    title: "Live Session",
-    description: "Sesión en vivo — álbum",
-    spotifyAlbumId: "6w5JvTMWJl1wD4eRGPA3kJ",
-    spotifyUrl: "https://open.spotify.com/intl-es/album/6w5JvTMWJl1wD4eRGPA3kJ",
-    youtubeId: "VJAOUMmVxmA",
-    youtubeUrl: "https://www.youtube.com/watch?v=VJAOUMmVxmA&list=PLnMoXbPBZOkRf7KSFVpgp7MqzCXgEKJ6v",
   },
   {
     title: "Zamba para no morir",
