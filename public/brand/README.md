@@ -9,7 +9,7 @@ Logo oficial de RUMBO en sus distintas variantes y formatos.
 | Archivo | Descripción | Uso |
 |---|---|---|
 | `rumbo-logo-full.svg` | **Símbolo + wordmark** (logo completo, horizontal) | Navbar, footer, EPK |
-| `rumbo-logo-mark.svg` | **Solo el símbolo** (las 3 montañas, sin texto) | Hero, favicon, watermarks de placeholder |
+| `rumbo-logo-mark.svg` | **Símbolo oficial** (cordillera + 6 triángulos, rebranding Valles) | Hero, Navbar, Footer, favicon, EPK |
 | `rumbo-logo-stacked.svg` *(opcional)* | Símbolo arriba, wordmark debajo | Open Graph, prints |
 
 > El SVG **debe ser monocromático** (un solo color) y usar `currentColor` en vez de fill/stroke fijo, así puedo recolorearlo desde CSS (rojo en hover, blanco en footer, etc.). Si tu logo tiene colores fijos, mandalo igual y yo lo adapto.
