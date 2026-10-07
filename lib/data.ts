@@ -14,6 +14,10 @@ export type Release = {
   youtubeId?: string;
   youtubeUrl?: string;
   comingSoon?: boolean;
+  /** Marca el estreno destacado: card a lo ancho con videoclip arriba. */
+  featured?: boolean;
+  /** Badge: "Videoclip oficial" en lugar de "Disponible". */
+  videoclip?: boolean;
 };
 
 export type ShowDate = {
@@ -41,6 +45,16 @@ export const MEMBERS: Member[] = [
 ];
 
 export const RELEASES: Release[] = [
+  {
+    title: "Valles",
+    description: "Primer videoclip oficial — canción propia",
+    spotifyTrackId: "5GYmtjCMbtfD9u0lAdl4zj",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/5GYmtjCMbtfD9u0lAdl4zj",
+    youtubeId: "6zgk9lYJwXg",
+    youtubeUrl: "https://youtu.be/6zgk9lYJwXg",
+    featured: true,
+    videoclip: true,
+  },
   {
     title: "La Luna",
     description: "Reversión de Áhyre",
