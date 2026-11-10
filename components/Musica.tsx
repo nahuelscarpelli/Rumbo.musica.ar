@@ -23,12 +23,13 @@ export function Musica() {
 
         <div className="mt-12 grid gap-px bg-border md:grid-cols-2">
           {RELEASES.map((release, i) => {
-            const highlighted = release.featured || release.videoclip;
+            const highlighted =
+              release.latest || release.videoclip || release.featured;
             const badgeLabel = release.comingSoon
               ? "Próximamente"
-              : release.featured && release.videoclip
+              : release.latest && release.videoclip
                 ? "Último lanzamiento · Videoclip oficial"
-                : release.featured
+                : release.latest
                   ? "Último lanzamiento"
                   : release.videoclip
                     ? "Videoclip oficial"

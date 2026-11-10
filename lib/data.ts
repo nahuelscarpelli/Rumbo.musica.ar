@@ -14,10 +14,12 @@ export type Release = {
   youtubeId?: string;
   youtubeUrl?: string;
   comingSoon?: boolean;
-  /** Marca el estreno destacado: card a lo ancho con videoclip arriba. */
+  /** Card a lo ancho (col-span-2) con YouTube embed arriba. El "principal" del grid. */
   featured?: boolean;
   /** Badge: "Videoclip oficial" en lugar de "Disponible". */
   videoclip?: boolean;
+  /** Badge: "Último lanzamiento" — se puede combinar con videoclip. */
+  latest?: boolean;
 };
 
 export type ShowDate = {
@@ -46,22 +48,23 @@ export const MEMBERS: Member[] = [
 
 export const RELEASES: Release[] = [
   {
-    title: "Zamba de árbol",
-    description: "Último lanzamiento",
-    spotifyTrackId: "6SL1HVXZegjOJpqP10KE4N",
-    spotifyUrl: "https://open.spotify.com/intl-es/track/6SL1HVXZegjOJpqP10KE4N",
-    youtubeId: "rrV7bwKw94k",
-    youtubeUrl: "https://www.youtube.com/watch?v=rrV7bwKw94k",
-    featured: true,
-  },
-  {
     title: "Valles",
     description: "Primer videoclip oficial",
     spotifyTrackId: "5GYmtjCMbtfD9u0lAdl4zj",
     spotifyUrl: "https://open.spotify.com/intl-es/track/5GYmtjCMbtfD9u0lAdl4zj",
     youtubeId: "6zgk9lYJwXg",
     youtubeUrl: "https://youtu.be/6zgk9lYJwXg",
+    featured: true,
     videoclip: true,
+  },
+  {
+    title: "Zamba del árbol",
+    description: "Videolyric — último lanzamiento",
+    spotifyTrackId: "6SL1HVXZegjOJpqP10KE4N",
+    spotifyUrl: "https://open.spotify.com/intl-es/track/6SL1HVXZegjOJpqP10KE4N",
+    youtubeId: "rrV7bwKw94k",
+    youtubeUrl: "https://www.youtube.com/watch?v=rrV7bwKw94k",
+    latest: true,
   },
   {
     title: "Vuela",
@@ -178,7 +181,7 @@ export const PRENSA_BIOS = {
   paragraph:
     "RUMBO es una banda de Mendoza que cruza el folclore argentino —zamba, chacarera, gato, cueca— con guitarras eléctricas, sintetizadores y producción contemporánea. El bombo legüero convive con loops y texturas electrónicas; la voz, con arreglos de banda completa. En 2026 ganaron la preselección de la Fiesta de la Tradición y se presentaron en su escenario mayor, quedaron ternados a Mejor Banda de Folclore en el Premio Provincial Identidad y fueron finalistas del Festival de la Canción Argentina con «Valles», su primer videoclip oficial. Antes, en 2025, habían salido ganadores del pre-festival de la Cueca y el Damasco de Santa Rosa y vuelto en 2026 como banda seleccionada del Festival Nacional.",
   long:
-    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea. Trabaja sobre zamba, chacarera, gato y cueca; suma bombo legüero, batería, bajo y teclados, y arma arreglos donde la raíz se sostiene a la par de las texturas electrónicas.\n\nSu propuesta en vivo se articula alrededor de Del Silencio a la Luna, un concierto teatral en cinco actos que recorre una dramaturgia continua desde la oscuridad total hasta la luz plena, con puesta lumínica sincronizada y proyección HDMI. El repertorio combina reversiones —como La Luna de Áhyre— con temas propios y colaboraciones, entre ellas Zamba para no morir junto a Cristian Soloa. En 2026 edita «Valles», su primer videoclip oficial, seguido por «Zamba de árbol» como último lanzamiento.\n\nEn 2026 la banda gana la preselección de la Fiesta de la Tradición y se presenta en su escenario mayor, queda ternada a Mejor Banda de Folclore en el Premio Provincial Identidad y es finalista del Festival de la Canción Argentina con «Valles». Antes había ganado el pre-festival de la Cueca y el Damasco de Santa Rosa (2025) y vuelto en 2026 como banda seleccionada del Festival Nacional. También fue elegida por La Cima FM de Tupungato dentro del ciclo Sacamos las Bandas del Garaje de Cosquín Rock Radio.\n\nRUMBO se presenta con el aval del INAMU Nuevo Cuyo y marca registrada INPI Nº 3.755.185, clase 41.",
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea. Trabaja sobre zamba, chacarera, gato y cueca; suma bombo legüero, batería, bajo y teclados, y arma arreglos donde la raíz se sostiene a la par de las texturas electrónicas.\n\nSu propuesta en vivo se articula alrededor de Del Silencio a la Luna, un concierto teatral en cinco actos que recorre una dramaturgia continua desde la oscuridad total hasta la luz plena, con puesta lumínica sincronizada y proyección HDMI. El repertorio combina reversiones —como La Luna de Áhyre— con temas propios y colaboraciones, entre ellas Zamba para no morir junto a Cristian Soloa. En 2026 edita «Valles», su primer videoclip oficial, seguido por el videolyric de «Zamba del árbol».\n\nEn 2026 la banda gana la preselección de la Fiesta de la Tradición y se presenta en su escenario mayor, queda ternada a Mejor Banda de Folclore en el Premio Provincial Identidad y es finalista del Festival de la Canción Argentina con «Valles». Antes había ganado el pre-festival de la Cueca y el Damasco de Santa Rosa (2025) y vuelto en 2026 como banda seleccionada del Festival Nacional. También fue elegida por La Cima FM de Tupungato dentro del ciclo Sacamos las Bandas del Garaje de Cosquín Rock Radio.\n\nRUMBO se presenta con el aval del INAMU Nuevo Cuyo y marca registrada INPI Nº 3.755.185, clase 41.",
 };
 
 export type PressMention = {
