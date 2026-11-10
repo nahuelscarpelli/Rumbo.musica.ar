@@ -176,9 +176,9 @@ export const PRENSA_BIOS = {
   oneLine:
     "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea.",
   paragraph:
-    "RUMBO es una banda de Mendoza que cruza el folclore argentino —zamba, chacarera, gato, cueca— con guitarras eléctricas, sintetizadores y producción contemporánea. El bombo legüero convive con loops y texturas electrónicas; la voz, con arreglos de banda completa. Han tocado en la Fiesta Departamental de la Vendimia de San Martín y en el Festival Nacional de la Cueca y el Damasco de Santa Rosa, donde salieron ganadores del pre-festival 2025.",
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino —zamba, chacarera, gato, cueca— con guitarras eléctricas, sintetizadores y producción contemporánea. El bombo legüero convive con loops y texturas electrónicas; la voz, con arreglos de banda completa. En 2026 ganaron la preselección de la Fiesta de la Tradición y se presentaron en su escenario mayor, quedaron ternados a Mejor Banda de Folclore en el Premio Provincial Identidad y fueron finalistas del Festival de la Canción Argentina con «Valles», su primer videoclip oficial.",
   long:
-    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea. Trabaja sobre zamba, chacarera, gato y cueca; suma bombo legüero, batería, bajo y teclados, y arma arreglos donde la raíz se sostiene a la par de las texturas electrónicas.\n\nSu propuesta en vivo se articula alrededor de Del Silencio a la Luna, un concierto teatral en cinco actos que recorre una dramaturgia continua desde la oscuridad total hasta la luz plena, con puesta lumínica sincronizada y proyección HDMI. El repertorio combina reversiones —como La Luna de Áhyre o Mi mariposa triste de Hernán Figueroa Reyes— con temas propios y colaboraciones, entre ellas Zamba para no morir junto a Cristian Soloa.\n\nLa banda ha tocado en la Fiesta Departamental de la Vendimia de San Martín, en la Vía Blanca de la Vendimia de Tupungato y en los actos del 25 de Mayo en Tunuyán y Tupungato. En 2025 ganó el pre-festival de la Cueca y el Damasco de Santa Rosa y participó como banda seleccionada del Festival Nacional en 2026. Fue elegida por La Cima FM de Tupungato dentro del ciclo Sacamos las Bandas del Garaje de Cosquín Rock Radio.\n\nRUMBO se presenta con el aval del INAMU Nuevo Cuyo y marca registrada INPI Nº 3.755.185, clase 41.",
+    "RUMBO es una banda de Mendoza que cruza el folclore argentino con guitarras eléctricas, sintetizadores y producción contemporánea. Trabaja sobre zamba, chacarera, gato y cueca; suma bombo legüero, batería, bajo y teclados, y arma arreglos donde la raíz se sostiene a la par de las texturas electrónicas.\n\nSu propuesta en vivo se articula alrededor de Del Silencio a la Luna, un concierto teatral en cinco actos que recorre una dramaturgia continua desde la oscuridad total hasta la luz plena, con puesta lumínica sincronizada y proyección HDMI. El repertorio combina reversiones —como La Luna de Áhyre o Mi mariposa triste de Hernán Figueroa Reyes— con temas propios y colaboraciones, entre ellas Zamba para no morir junto a Cristian Soloa. En 2026 edita «Valles», su primer videoclip oficial.\n\nEn 2026 la banda gana la preselección de la Fiesta de la Tradición y se presenta en su escenario mayor, queda ternada a Mejor Banda de Folclore en el Premio Provincial Identidad y es finalista del Festival de la Canción Argentina con «Valles». Antes había ganado el pre-festival de la Cueca y el Damasco de Santa Rosa (2025) y vuelto en 2026 como banda seleccionada del Festival Nacional. Se suman presentaciones en la Fiesta Departamental de la Vendimia de San Martín, la Vía Blanca de la Vendimia de Tupungato y los actos del 25 de Mayo en Tunuyán y Tupungato, además de haber sido elegida por La Cima FM de Tupungato dentro del ciclo Sacamos las Bandas del Garaje de Cosquín Rock Radio.\n\nRUMBO se presenta con el aval del INAMU Nuevo Cuyo y marca registrada INPI Nº 3.755.185, clase 41.",
 };
 
 export type PressMention = {
@@ -205,19 +205,34 @@ export type Antecedent = {
 };
 
 export const PRENSA_ANTECEDENTS: Antecedent[] = [
-  { event: "Fiesta Departamental de la Vendimia", place: "San Martín" },
-  { event: "Vía Blanca de la Vendimia", place: "Tupungato" },
-  { event: "25 de Mayo departamental", place: "Tunuyán y Tupungato" },
   {
-    event: "Ganadores Pre Festival de la Cueca y el Damasco",
-    place: "Santa Rosa",
-    year: "2025",
+    event: "Festival de la Canción Argentina",
+    place: "Finalistas con «Valles»",
+    year: "2026",
+  },
+  {
+    event: "Premio Provincial Identidad",
+    place: "Ternados — Mejor Banda de Folclore",
+    year: "2026",
+  },
+  {
+    event: "Fiesta de la Tradición",
+    place: "Ganadores de preselección + escenario mayor",
+    year: "2026",
   },
   {
     event: "Festival Nacional de la Cueca y el Damasco",
     place: "Santa Rosa",
     year: "2026",
   },
+  {
+    event: "Ganadores Pre Festival de la Cueca y el Damasco",
+    place: "Santa Rosa",
+    year: "2025",
+  },
+  { event: "Fiesta Departamental de la Vendimia", place: "San Martín" },
+  { event: "Vía Blanca de la Vendimia", place: "Tupungato" },
+  { event: "25 de Mayo departamental", place: "Tunuyán y Tupungato" },
 ];
 
 export type PressPhoto = {
