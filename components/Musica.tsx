@@ -23,15 +23,20 @@ export function Musica() {
 
         <div className="mt-12 grid gap-px bg-border md:grid-cols-2">
           {RELEASES.map((release, i) => {
+            const highlighted = release.featured || release.videoclip;
             const badgeLabel = release.comingSoon
               ? "Próximamente"
-              : release.videoclip
-                ? "Estreno · Videoclip oficial"
-                : "Disponible";
-            const badgeTone = release.comingSoon || release.videoclip
+              : release.featured && release.videoclip
+                ? "Último lanzamiento · Videoclip oficial"
+                : release.featured
+                  ? "Último lanzamiento"
+                  : release.videoclip
+                    ? "Videoclip oficial"
+                    : "Disponible";
+            const badgeTone = release.comingSoon || highlighted
               ? "text-accent"
               : "text-muted";
-            const dotTone = release.comingSoon || release.videoclip
+            const dotTone = release.comingSoon || highlighted
               ? "bg-accent"
               : "bg-accent-2";
             return (
@@ -77,7 +82,7 @@ export function Musica() {
                       <div className="relative aspect-video w-full overflow-hidden border border-border bg-black/60">
                         <iframe
                           src={`https://www.youtube-nocookie.com/embed/${release.youtubeId}?rel=0&modestbranding=1`}
-                          title={`${release.title} — videoclip oficial`}
+                          title={release.videoclip ? `${release.title} — videoclip oficial` : `${release.title} — YouTube`}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           loading="lazy"
